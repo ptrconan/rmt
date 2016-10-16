@@ -14,7 +14,7 @@
 	<description>RMT Buienradar Service Provider</description>
 
 	<properties>
-		<fabric8.profile>${project.groupId}-buienradar.service.adapter</fabric8.profile>
+		<fabric8.profile>${project.groupId}-buienradar.serviceprovider</fabric8.profile>
 		<fabric8.parentProfiles>org.vpk.rmt-parent.profile</fabric8.parentProfiles>
 		<fabric8.features>
 			camel-core
@@ -27,7 +27,7 @@
 		</fabric8.features>
 		<fabric8.bundles>
 			mvn:org.vpk.rmt/buienradar/${project.version}
-			mvn:org.vpk.rmt.contracts/buienradar-service-adapter-api/${project.version}
+			mvn:org.vpk.rmt/buienradar-service-adapter-api/${project.version}
 		</fabric8.bundles>
 		<fabric8.featureRepos />
 	</properties>
@@ -154,10 +154,7 @@
 					<instructions>
 						<Import-Package>
 							org.apache.camel.spi,
-							com.lgi.map.commons.client,
-							com.lgi.map.contracts.traxis.custom,
-							com.lgi.map.contracts.buienradar.service.adapter.api,
-							com.lgi.map.camel.builder,
+							org.vpk.rmt.buienradar.service.adapter.api,
 							*
 						</Import-Package>
 					</instructions>

@@ -1,4 +1,4 @@
-package org.vpk.rmt.serviceprovider.frontend.buienradar.api;
+package org.vpk.rmt.buienradar.serviceprovider.frontend.api;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -12,15 +12,15 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
- * This interface is the endpoint to connect to the buienradar front service provider.
+ * This interface is the endpoint to connect to the buienradar service provider front end.
  */
-@Path(BuienradarFrontEndServiceProviderApi.PATH_ROOT)
+@Path(BuienradarServiceProviderFrontEndApi.PATH_ROOT)
 @Api(
-    value = BuienradarFrontEndServiceProviderApi.PATH_ROOT,
+    value = BuienradarServiceProviderFrontEndApi.PATH_ROOT,
     description = "Rest API providing Buienradar front end services.",
-    produces = BuienradarFrontEndServiceProviderApi.CONTENT_TYPE_JSON_UTF8
+    produces = BuienradarServiceProviderFrontEndApi.CONTENT_TYPE_JSON_UTF8
 )
-public interface BuienradarFrontEndServiceProviderApi {
+public interface BuienradarServiceProviderFrontEndApi {
     String CONTENT_TYPE_JSON_UTF8 = MediaType.APPLICATION_JSON + "; charset=utf-8\"";
 
     // paths constants
