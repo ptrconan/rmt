@@ -1,6 +1,6 @@
-package org.vpk.rmt.buienradar.serviceprovider.frontend.impl;
+package org.vpk.rmt.serviceproviders.buienradar.frontend.impl;
 
-import org.vpk.rmt.buienradar.serviceprovider.frontend.api.BuienradarFrontEndApi;
+import org.vpk.rmt.serviceproviders.buienradar.frontend.api.BuienradarFrontEndApi;
 
 public class BuienradarFrontEnd implements BuienradarFrontEndApi {
 

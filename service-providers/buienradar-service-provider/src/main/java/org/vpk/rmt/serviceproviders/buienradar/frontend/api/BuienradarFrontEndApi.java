@@ -1,4 +1,4 @@
-package org.vpk.rmt.buienradar.serviceprovider.frontend.api;
+package org.vpk.rmt.serviceproviders.buienradar.frontend.api;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;

@@ -20,7 +20,7 @@
     <!-- overwrite properties inherited from the parent profile. -->
     <cm:property-placeholder id="serviceprovidersProfileConfiguration" persistent-id="org.vpk.rmt.serviceproviders" placeholder-prefix="$(" placeholder-suffix=")" >
         <cm:default-properties>
-            <cm:property name="cxf.logging.feature"                    value="UNDEFINED" />
+            <cm:property name="cxf.logging.feature"				value="UNDEFINED" />
         </cm:default-properties>
     </cm:property-placeholder>
 
@@ -28,7 +28,7 @@
     <cxf:rsServer
         id="buienradarFrontEnd"
         address="{{buienradar.frontend.endpoint}}"
-        serviceClass="org.vpk.rmt.buienradar.serviceprovider.frontend.api.BuienradarFrontEndApi"
+        serviceClass="org.vpk.rmt.serviceproviders.buienradar.frontend.api.BuienradarFrontEndApi"
         loggingFeatureEnabled="true"
     >
         <cxf:providers>
@@ -41,7 +41,7 @@
 	<cxf:rsClient
         id="buienradarBackEnd"
         address="{{buienradar.backend.endpoint}}"
-        serviceClass="org.vpk.rmt.buienradar.serviceprovider.backend.api.BuienradarBackEndApi"
+        serviceClass="org.vpk.rmt.serviceproviders.buienradar.backend.api.BuienradarBackEndApi"
         loggingFeatureEnabled="true"
     >
         <cxf:features>
@@ -51,7 +51,6 @@
         </cxf:features>
     </cxf:rsClient>
 
-	
 	<!-- 
     <cxf-core:bus bus="cxfServer">
         <cxf-core:features>
@@ -68,16 +67,16 @@
     </camelContext>
 
     <!-- camel routes -->
-    <bean id="buienradarBackEndRoute" class="org.vpk.rmt.buienradar.serviceprovider.backend.impl.BuienradarBackEndRoute">
+    <bean id="buienradarBackEndRoute" class="org.vpk.rmt.serviceproviders.buienradar.backend.impl.BuienradarBackEndRoute">
         <property name="transformResponseProcessor" ref="transformResponseProcessor"/>
         <property name="errorResponseProcessor" ref="errorResponseProcessor"/>
     </bean>
 
     <!-- camel processors -->
-    <bean id="transformResponseProcessor" class="org.vpk.rmt.buienradar.serviceprovider.backend.impl.processor.TransformResponseProcessor">
+    <bean id="transformResponseProcessor" class="org.vpk.rmt.serviceproviders.buienradar.backend.impl.processor.TransformResponseProcessor">
     </bean>
 
-    <bean id="errorResponseProcessor" class="org.vpk.rmt.buienradar.serviceprovide.backend.impl.processor.ErrorResponseProcessor">
+    <bean id="errorResponseProcessor" class="org.vpk.rmt.serviceproviders.buienradar.backend.impl.processor.ErrorResponseProcessor">
     </bean>
 
     <!-- cxf providers -->
