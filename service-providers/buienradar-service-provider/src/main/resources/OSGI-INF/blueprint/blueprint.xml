@@ -10,10 +10,10 @@
 	    http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd
         http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd"
 >
-    <cm:property-placeholder id="buienradarProfileConfiguration" persistent-id="org.vpk.rmt.serviceadapters.buienradar">
+    <cm:property-placeholder id="buienradarProfileConfiguration" persistent-id="org.vpk.rmt.serviceproviders.buienradar">
         <cm:default-properties>
-            <cm:property name="buienradar.serviceprovider.frontend.endpoint"	value="UNDEFINED" />
-            <cm:property name="buienradar.serviceprovider.backend.endpoint"		value="UNDEFINED" />
+            <cm:property name="buienradar.frontend.endpoint"	value="UNDEFINED" />
+            <cm:property name="buienradar.backend.endpoint"		value="UNDEFINED" />
         </cm:default-properties>
     </cm:property-placeholder>
 
@@ -26,9 +26,9 @@
 
     <!-- cxf server e.g. buienradar service provider front end -->
     <cxf:rsServer
-        id="buienradarServiceProviderFrontEnd"
-        address="{{buienradar.serviceprovider.frontend.endpoint}}"
-        serviceClass="org.vpk.rmt.buienradar.serviceproviders.frontend.api.BuienradarServiceProviderFrontEndApi"
+        id="buienradarFrontEnd"
+        address="{{buienradar.frontend.endpoint}}"
+        serviceClass="org.vpk.rmt.buienradar.serviceprovider.frontend.api.BuienradarFrontEndApi"
         loggingFeatureEnabled="true"
     >
         <cxf:providers>
@@ -38,11 +38,10 @@
     </cxf:rsServer>
 
     <!-- cxf client e.g. buienradar service provider back end -->
-	<!-- 
-    <cxf:rsClient
-        id="buienradarServiceProviderBackEnd"
-        address="{{buienradar.serviceprovider.backend.endpoint}}"
-        serviceClass="org.vpk.rmt.buienradar.serviceproviders.backend.api.BuienradarServiceProviderBackEndApi"
+	<cxf:rsClient
+        id="buienradarBackEnd"
+        address="{{buienradar.backend.endpoint}}"
+        serviceClass="org.vpk.rmt.buienradar.serviceprovider.backend.api.BuienradarBackEndApi"
         loggingFeatureEnabled="true"
     >
         <cxf:features>
@@ -51,7 +50,6 @@
             </bean>
         </cxf:features>
     </cxf:rsClient>
-	-->
 
 	
 	<!-- 
@@ -66,20 +64,20 @@
 
     <!-- camel context -->
     <camelContext id="adapter" xmlns="http://camel.apache.org/schema/blueprint">
-        <routeBuilder ref="buienradarServiceProviderBackEndRoute" />
+        <routeBuilder ref="buienradarBackEndRoute" />
     </camelContext>
 
     <!-- camel routes -->
-    <bean id="buienradarServiceProviderBackEndRoute" class="org.vpk.rmt.buienradar.serviceproviders.backend.impl.BuienradarServiceProviderBackEndRoute">
+    <bean id="buienradarBackEndRoute" class="org.vpk.rmt.buienradar.serviceprovider.backend.impl.BuienradarBackEndRoute">
         <property name="transformResponseProcessor" ref="transformResponseProcessor"/>
         <property name="errorResponseProcessor" ref="errorResponseProcessor"/>
     </bean>
 
     <!-- camel processors -->
-    <bean id="transformResponseProcessor" class="org.vpk.rmt.buienradar.serviceproviders.backend.impl.processor.TransformResponseProcessor">
+    <bean id="transformResponseProcessor" class="org.vpk.rmt.buienradar.serviceprovider.backend.impl.processor.TransformResponseProcessor">
     </bean>
 
-    <bean id="errorResponseProcessor" class="org.vpk.rmt.buienradar.serviceprovider.backend.impl.processor.ErrorResponseProcessor">
+    <bean id="errorResponseProcessor" class="org.vpk.rmt.buienradar.serviceprovide.backend.impl.processor.ErrorResponseProcessor">
     </bean>
 
     <!-- cxf providers -->

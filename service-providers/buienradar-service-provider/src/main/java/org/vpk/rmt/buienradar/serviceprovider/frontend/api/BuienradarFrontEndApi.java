@@ -12,18 +12,18 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
- * This interface is the endpoint to connect to the buienradar service provider front end.
+ * This interface is the endpoint to connect to the buienradar front end.
  */
-@Path(BuienradarServiceProviderFrontEndApi.PATH_ROOT)
+@Path(BuienradarFrontEndApi.PATH_ROOT)
 @Api(
-    value = BuienradarServiceProviderFrontEndApi.PATH_ROOT,
+    value = BuienradarFrontEndApi.PATH_ROOT,
     description = "Rest API providing Buienradar front end services.",
-    produces = BuienradarServiceProviderFrontEndApi.CONTENT_TYPE_JSON_UTF8
+    produces = BuienradarFrontEndApi.CONTENT_TYPE_JSON_UTF8
 )
-public interface BuienradarServiceProviderFrontEndApi {
+public interface BuienradarFrontEndApi {
     String CONTENT_TYPE_JSON_UTF8 = MediaType.APPLICATION_JSON + "; charset=utf-8\"";
 
-    // paths constants
+    // path constants
     String PATH_ROOT = "/";
     String PATH_WEATHER = "/weather/{country}";
 
@@ -41,14 +41,14 @@ public interface BuienradarServiceProviderFrontEndApi {
      *  Flag to indicate if debug information is to be provided.
      *
      * @return
-     *  The weather information for the requested country.
+     *  The weather information for a country.
      * @since
      *  1.0.0
      */
     @GET
     @Path(PATH_WEATHER)
     @Produces(CONTENT_TYPE_JSON_UTF8)
-    @ApiOperation(value = PATH_WEATHER, httpMethod = "GET", notes = "This will return the weather information", response = String.class)
+    @ApiOperation(value = PATH_WEATHER, httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
     String getWeatherInformation(
         @PathParam(PARAM_COUNTRY) String country,
         @QueryParam(PARAM_CITY) String city,
