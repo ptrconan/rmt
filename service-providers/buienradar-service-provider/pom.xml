@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.vpk.rmt</groupId>
+		<artifactId>service-providers</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>buienradar-service-provider</artifactId>
+	<packaging>bundle</packaging>
+	<name>RMT :: Service Providers :: Buienradar Service Provider</name>
+	<description>RMT Buienradar Service Provider</description>
+
+	<properties>
+		<fabric8.profile>${project.groupId}-buienradar.service.adapter</fabric8.profile>
+		<fabric8.parentProfiles>org.vpk.rmt-parent.profile</fabric8.parentProfiles>
+		<fabric8.features>
+			camel-core
+			transaction
+			camel-jetty
+			jetty
+			jsr-311
+			camel-velocity
+			camel-servlet
+		</fabric8.features>
+		<fabric8.bundles>
+			mvn:org.vpk.rmt/buienradar/${project.version}
+			mvn:org.vpk.rmt.contracts/buienradar-service-adapter-api/${project.version}
+		</fabric8.bundles>
+		<fabric8.featureRepos />
+	</properties>
+
+	<dependencies>
+		<!--+
+			| vpk dependencies, sorted by alphabet
+			+-->
+
+		<!--+
+			| non-vpk dependencies, sorted by alphabet
+			+-->
+		<dependency>
+			<!-- Used for swagger -->
+			<groupId>com.wordnik</groupId>
+			<artifactId>swagger-jaxrs_2.10</artifactId>
+			<scope>provided</scope>
+			<exclusions>
+				<!-- Exclusion fixes missing dependency. -->
+				<exclusion>
+					<groupId>javax.ws.rs</groupId>
+					<artifactId>jsr311-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-cxf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-cxf-transport</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jackson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-servlet</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-velocity</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-databinding-jaxb</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>asm</artifactId>
+					<groupId>asm</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-extension-providers</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jettison</groupId>
+			<artifactId>jettison</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
+			<version>${com.fasterxml.jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+
+		<!--+
+			| Test dependencies, sorted by alphabet
+			+-->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>xmlunit</groupId>
+			<artifactId>xmlunit</artifactId>
+			<version>1.6</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Import-Package>
+							org.apache.camel.spi,
+							com.lgi.map.commons.client,
+							com.lgi.map.contracts.traxis.custom,
+							com.lgi.map.contracts.buienradar.service.adapter.api,
+							com.lgi.map.camel.builder,
+							*
+						</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>fabric8-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>fabric8-zip</id>
+						<phase>package</phase>
+						<goals>
+							<goal>zip</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
