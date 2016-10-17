@@ -32,11 +32,13 @@
         loggingFeatureEnabled="true"
     >
         <cxf:providers>
+            <!--
             <ref component-id="objectMapperProvider"/>
+            -->
             <ref component-id="jsonProvider"/>
         </cxf:providers>
     </cxf:rsServer>
-
+  
     <!-- cxf client e.g. buienradar service provider back end -->
 	<cxf:rsClient
         id="buienradarBackEnd"
@@ -44,11 +46,13 @@
         serviceClass="org.vpk.rmt.serviceproviders.buienradar.backend.api.BuienradarBackEndApi"
         loggingFeatureEnabled="true"
     >
+	    <!-- 
         <cxf:features>
             <bean class="">
                 <argument ref="adapter"/>
             </bean>
         </cxf:features>
+        -->
     </cxf:rsClient>
 
 	<!-- 
@@ -69,18 +73,14 @@
     <!-- camel routes -->
     <bean id="buienradarBackEndRoute" class="org.vpk.rmt.serviceproviders.buienradar.backend.impl.BuienradarBackEndRoute">
         <property name="transformResponseProcessor" ref="transformResponseProcessor"/>
-        <property name="errorResponseProcessor" ref="errorResponseProcessor"/>
     </bean>
 
     <!-- camel processors -->
-    <bean id="transformResponseProcessor" class="org.vpk.rmt.serviceproviders.buienradar.backend.impl.processor.TransformResponseProcessor">
-    </bean>
-
-    <bean id="errorResponseProcessor" class="org.vpk.rmt.serviceproviders.buienradar.backend.impl.processor.ErrorResponseProcessor">
+    <bean id="transformResponseProcessor" class="org.vpk.rmt.serviceproviders.buienradar.backend.impl.TransformResponseProcessor">
     </bean>
 
     <!-- cxf providers -->
-    <bean id="objectMapperProvider" class="org.vpk.rmt.util.ObjectMapperProvider"/>
+    <bean id="objectMapperProvider" class="org.vpk.rmt.serviceproviders.util.ObjectMapperProvider"/>
     <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
 
 </blueprint>

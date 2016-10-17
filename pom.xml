@@ -26,7 +26,6 @@
 		<skipUnitTests>${skipTests}</skipUnitTests>
 		<skipIntegrationTests>${skipTests}</skipIntegrationTests>
 		<joda.time.version>2.5</joda.time.version>
-		<version.mes.release>1.6.5</version.mes.release>
 		<!--+
 			| Fuse framework version 
 		 	-->
@@ -76,100 +75,11 @@
 			</dependency>
 
             <dependency>
-				<groupId>com.lgi.map</groupId>
-				<artifactId>cbo</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map</groupId>
-				<artifactId>exmag</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map</groupId>
-				<artifactId>horizon4</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map</groupId>
-				<artifactId>reng</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map</groupId>
-				<artifactId>traxis</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map</groupId>
-				<artifactId>traxis-transformations</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map</groupId>
-				<artifactId>dawn-transformations</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map.contracts</groupId>
-				<artifactId>client-commons</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map.contracts</groupId>
-				<artifactId>exmag-service-adapter-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map.contracts</groupId>
-				<artifactId>horizon4-client-adapter-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map.contracts</groupId>
-				<artifactId>mes-service-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map.contracts</groupId>
-				<artifactId>reng-service-adapter-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map.contracts</groupId>
-				<artifactId>task-services-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map.contracts</groupId>
-				<artifactId>traxis-service-adapter-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.lgi.map.test</groupId>
-				<artifactId>test-support</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-            <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>${commons.lang.version}</version>
             </dependency>
+
 			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
@@ -328,7 +238,7 @@
 
 			<!-- This instance of the fabric8 plugin is to make sure the aggregate zip that
 			is generated at the end of the build does not override any existing profile zips.
-			If you comment out the fabric8 plugin below you'll notice the traxis-service-adapter
+			If you comment out the fabric8 plugin below you'll notice that some
 			profile.zip contains an aggregation of every profile zip file generated during the build.
 			-->
 			<plugin>

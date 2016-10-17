@@ -13,9 +13,10 @@
 	<name>RMT :: Service Providers :: Buienradar Service Provider</name>
 	<description>RMT Buienradar Service Provider</description>
 
+<!--
 	<properties>
-		<fabric8.profile>${project.groupId}-buienradar.serviceprovider</fabric8.profile>
-		<fabric8.parentProfiles>org.vpk.rmt-parent.profile</fabric8.parentProfiles>
+		<fabric8.profile>${project.groupId}-serviceproviders.buienradar</fabric8.profile>
+		<fabric8.parentProfiles>org.vpk.rmt.serviceproviders.profile</fabric8.parentProfiles>
 		<fabric8.features>
 			camel-core
 			transaction
@@ -25,13 +26,14 @@
 			camel-velocity
 			camel-servlet
 		</fabric8.features>
+		<fabric8.bundles />
 		<fabric8.bundles>
-			mvn:org.vpk.rmt/buienradar/${project.version}
-			mvn:org.vpk.rmt/buienradar-service-adapter-api/${project.version}
+			mvn:org.vpk.rmt/buienradar-service-provider/${project.version}
 		</fabric8.bundles>
 		<fabric8.featureRepos />
 	</properties>
-
+-->	
+	
 	<dependencies>
 		<!--+
 			| vpk dependencies, sorted by alphabet
@@ -61,6 +63,10 @@
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
@@ -153,8 +159,7 @@
 				<configuration>
 					<instructions>
 						<Import-Package>
-							org.apache.camel.spi,
-							org.vpk.rmt.buienradar.service.adapter.api,
+                            javax.ws.rs.core,
 							*
 						</Import-Package>
 					</instructions>
