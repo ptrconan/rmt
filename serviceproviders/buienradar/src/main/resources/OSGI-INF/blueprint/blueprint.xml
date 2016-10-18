@@ -10,7 +10,7 @@
 	    http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd
         http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd"
 >
-    <cm:property-placeholder id="buienradarProfileConfiguration" persistent-id="org.vpk.rmt.buienradar.serviceprovider">
+    <cm:property-placeholder id="buienradarProfileConfiguration" persistent-id="org.vpk.rmt.serviceproviders.buienradar">
         <cm:default-properties>
             <cm:property name="frontend.endpoint"	value="UNDEFINED" />
             <cm:property name="backend.endpoint"	value="UNDEFINED" />

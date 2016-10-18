@@ -1,6 +1,6 @@
 echo "*** Configure local environment ..."
-#profile-edit --pid org.vpk.rmt.buienradar.serviceprovider/frontend.endpoint=http://localhost:9999 org.vpk.rmt-buienradar.serviceprovider
-profile-edit --pid org.vpk.rmt.buienradar.serviceprovider/backend.endpoint=http://xml.buienradar.nl org.vpk.rmt-buienradar.serviceprovider
+#profile-edit --pid org.vpk.rmt.serviceproviders.buienradar/frontend.endpoint=http://localhost:9999 org.vpk.rmt-serviceproviders.buienradar
+profile-edit --pid org.vpk.rmt.serviceproviders.buienradar/backend.endpoint=http://xml.buienradar.nl org.vpk.rmt-serviceproviders.buienradar
 #profile-edit --pid org.vpk.rmt.serviceproviders/cxf.logging.feature=true org.vpk.rmt-serviceproviders
 profile-edit --pid org.ops4j.pax.logging/log4j.logger.org.apache.cxf=INFO karaf
 profile-edit --pid org.ops4j.pax.logging/log4j.appender.out.maxFileSize=5MB karaf

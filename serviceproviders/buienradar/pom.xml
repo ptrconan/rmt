@@ -8,9 +8,10 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>buienradar-serviceprovider</artifactId>
+	<groupId>org.vpk.rmt.serviceproviders</groupId>
+	<artifactId>buienradar</artifactId>
 	<packaging>bundle</packaging>
-	<name>RMT :: Serviceproviders :: Buienradar Serviceprovider</name>
+	<name>RMT :: Serviceproviders :: Buienradar</name>
 	<description>RMT Buienradar Serviceprovider</description>
 
 <!--

@@ -14,7 +14,7 @@
 	<description>RMT Serviceproviders POM</description>
 
 	<modules>
-		<module>buienradar-serviceprovider</module>
+		<module>buienradar</module>
 	</modules>
 
 </project>
