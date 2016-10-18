@@ -18,7 +18,7 @@
     </cm:property-placeholder>
 
     <!-- overwrite properties inherited from the parent profile. -->
-    <cm:property-placeholder id="serviceprovidersProfileConfiguration" persistent-id="org.vpk.rmt.serviceproviders" placeholder-prefix="$(" placeholder-suffix=")" >
+    <cm:property-placeholder id="serviceprovidersProfileConfiguration" persistent-id="org.vpk.rmt.parent.profile" placeholder-prefix="$(" placeholder-suffix=")" >
         <cm:default-properties>
             <cm:property name="cxf.logging.feature"				value="UNDEFINED" />
         </cm:default-properties>

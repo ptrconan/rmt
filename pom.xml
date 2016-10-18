@@ -54,6 +54,7 @@
 	</properties>
 
 	<modules>
+		<module>integration</module>
 		<module>service-providers</module>
 	</modules>
 
@@ -259,12 +260,12 @@
 
 	<distributionManagement>
 		<repository>
-			<id>rmt-nexus</id>
+			<id>vpk-nexus</id>
 			<name>Internal Releases</name>
 			<url>http://localhost:8081/nexus/content/repositories/releases/</url>
 		</repository>
 		<snapshotRepository>
-			<id>rmt-nexus</id>
+			<id>vpk-nexus</id>
 			<name>Internal Snapshots</name>
 			<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
@@ -272,8 +273,8 @@
 
 	<repositories>
 		<repository>
-			<id>rmt-nexus</id>
-			<name>Riddle Me This Central Repository</name>
+			<id>vpk-nexus</id>
+			<name>VPK Central Repository</name>
 			<url>http://localhost:8081/nexus/content/groups/public</url>
 			<snapshots>
 				<enabled>false</enabled>
@@ -282,8 +283,8 @@
 	</repositories>	
 	<pluginRepositories>
 		<pluginRepository>
-			<id>rmt-nexus</id>
-			<name>Riddle Me This Central Repository</name>
+			<id>vpk-nexus</id>
+			<name>VPK Central Repository</name>
 			<url>http://localhost:8081/nexus/content/groups/public</url>
 			<snapshots>
 				<enabled>false</enabled>

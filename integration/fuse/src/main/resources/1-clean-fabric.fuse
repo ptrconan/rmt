@@ -1,0 +1,10 @@
+VERSION=${project.version}
+
+echo "*** Remove existing child containers ..."
+fabric:container-delete rmt-*
+
+echo "*** Set default version to 1.0 (default) ..."
+version-set-default 1.0
+
+echo "*** Delete current version ..."
+version-delete $VERSION

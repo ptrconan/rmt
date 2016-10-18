@@ -1,0 +1,34 @@
+VERSION=${project.version}
+#ENV=$1
+ENV=local
+
+echo "*** Wait for provisioning ..."
+wait-for-provisioning
+
+echo "*** Set default version ..."
+echo "Set default version to: $VERSION"
+echo "Set environment to: $ENV"
+version-create $VERSION
+version-set-default $VERSION
+
+echo "*** Configure HTTP Gateway profile ..."
+profile-edit --delete --pid io.fabric8.gateway.http.mapping-git gateway-http
+profile-edit --delete --pid io.fabric8.gateway.http.mapping-servlets gateway-http
+profile-edit --delete --pid io.fabric8.gateway.http.mapping-webapps gateway-http
+
+echo "*** Configure log settings in karaf profile ..."
+profile-edit --pid org.ops4j.pax.logging/log4j.logger.io.fabric8.gateway.handlers=WARN karaf
+profile-edit --pid org.ops4j.pax.logging/log4j.logger.org.apache.cxf=WARN karaf
+
+echo "*** Import profiles ..."
+profile-import mvn:org.vpk.rmt/parent-profile/$VERSION/zip/profile
+profile-import mvn:org.vpk.rmt/buienradar-service-provider/$VERSION/zip/profile
+
+echo "*** Execute script to provision environment ...
+source mvn:org.vpk.rmt.integration/fuse/$VERSION/fuse/3-provision-environment-$ENV
+
+echo "*** Wait for provisioning ..."
+sleep --second 5 
+wait-for-provisioning
+
+echo "*** Done."
