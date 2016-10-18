@@ -21,8 +21,8 @@ profile-edit --pid org.ops4j.pax.logging/log4j.logger.io.fabric8.gateway.handler
 profile-edit --pid org.ops4j.pax.logging/log4j.logger.org.apache.cxf=WARN karaf
 
 echo "*** Import profiles ..."
-profile-import mvn:org.vpk.rmt/parent-profile/$VERSION/zip/profile
-profile-import mvn:org.vpk.rmt/buienradar-service-provider/$VERSION/zip/profile
+profile-import mvn:org.vpk.rmt/serviceproviders/$VERSION/zip/profile
+profile-import mvn:org.vpk.rmt/buienradar-serviceprovider/$VERSION/zip/profile
 
 echo "*** Execute script to provision environment ...
 source mvn:org.vpk.rmt.integration/fuse/$VERSION/fuse/3-provision-environment-$ENV

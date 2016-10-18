@@ -8,13 +8,13 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>service-providers</artifactId>
+	<artifactId>serviceproviders</artifactId>
 	<packaging>pom</packaging>
-	<name>RMT :: Service Providers :: POM</name>
-	<description>RMT Service Providers POM</description>
+	<name>RMT :: Serviceproviders :: POM</name>
+	<description>RMT Serviceproviders POM</description>
 
 	<modules>
-		<module>buienradar-service-provider</module>
+		<module>buienradar-serviceprovider</module>
 	</modules>
 
 </project>

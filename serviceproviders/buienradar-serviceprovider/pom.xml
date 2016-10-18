@@ -4,14 +4,14 @@
 
 	<parent>
 		<groupId>org.vpk.rmt</groupId>
-		<artifactId>service-providers</artifactId>
+		<artifactId>serviceproviders</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>buienradar-service-provider</artifactId>
+	<artifactId>buienradar-serviceprovider</artifactId>
 	<packaging>bundle</packaging>
-	<name>RMT :: Service Providers :: Buienradar Service Provider</name>
-	<description>RMT Buienradar Service Provider</description>
+	<name>RMT :: Serviceproviders :: Buienradar Serviceprovider</name>
+	<description>RMT Buienradar Serviceprovider</description>
 
 <!--
 	<properties>

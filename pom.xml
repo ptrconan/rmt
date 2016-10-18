@@ -55,7 +55,7 @@
 
 	<modules>
 		<module>integration</module>
-		<module>service-providers</module>
+		<module>serviceproviders</module>
 	</modules>
 
 <!-- TODO setup git repo

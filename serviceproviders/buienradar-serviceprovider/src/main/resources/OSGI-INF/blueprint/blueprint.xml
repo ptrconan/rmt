@@ -10,24 +10,24 @@
 	    http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd
         http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd"
 >
-    <cm:property-placeholder id="buienradarProfileConfiguration" persistent-id="org.vpk.rmt.serviceproviders.buienradar">
+    <cm:property-placeholder id="buienradarProfileConfiguration" persistent-id="org.vpk.rmt.buienradar.serviceprovider">
         <cm:default-properties>
-            <cm:property name="buienradar.frontend.endpoint"	value="UNDEFINED" />
-            <cm:property name="buienradar.backend.endpoint"		value="UNDEFINED" />
+            <cm:property name="frontend.endpoint"	value="UNDEFINED" />
+            <cm:property name="backend.endpoint"	value="UNDEFINED" />
         </cm:default-properties>
     </cm:property-placeholder>
 
     <!-- overwrite properties inherited from the parent profile. -->
-    <cm:property-placeholder id="serviceprovidersProfileConfiguration" persistent-id="org.vpk.rmt.parent.profile" placeholder-prefix="$(" placeholder-suffix=")" >
+    <cm:property-placeholder id="serviceprovidersProfileConfiguration" persistent-id="org.vpk.rmt.serviceproviders" placeholder-prefix="$(" placeholder-suffix=")" >
         <cm:default-properties>
-            <cm:property name="cxf.logging.feature"				value="UNDEFINED" />
+            <cm:property name="cxf.logging.feature"	value="UNDEFINED" />
         </cm:default-properties>
     </cm:property-placeholder>
 
     <!-- cxf server e.g. buienradar service provider front end -->
     <cxf:rsServer
         id="buienradarFrontEnd"
-        address="{{buienradar.frontend.endpoint}}"
+        address="{{frontend.endpoint}}"
         serviceClass="org.vpk.rmt.serviceproviders.buienradar.frontend.api.BuienradarFrontEndApi"
         loggingFeatureEnabled="true"
     >
@@ -42,7 +42,7 @@
     <!-- cxf client e.g. buienradar service provider back end -->
 	<cxf:rsClient
         id="buienradarBackEnd"
-        address="{{buienradar.backend.endpoint}}"
+        address="{{backend.endpoint}}"
         serviceClass="org.vpk.rmt.serviceproviders.buienradar.backend.api.BuienradarBackEndApi"
         loggingFeatureEnabled="true"
     >
