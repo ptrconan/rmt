@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.vpk.rmt</groupId>
+		<artifactId>profiles</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.vpk.rmt.profiles</groupId>
+	<artifactId>parent</artifactId>
+    <packaging>pom</packaging>
+    <name>RMT :: Profiles :: Parent</name>
+    <description>RMT Profiles Parent</description>
+
+    <properties>
+    	<fabric8.profile>${project.groupId}-parent.profile</fabric8.profile>
+        <fabric8.parentProfiles>feature-cxf feature-camel</fabric8.parentProfiles>
+        <fabric8.features>
+        	camel-blueprint 
+        	camel-cxf 
+        	fabric-cxf 
+        	camel-http 
+        	camel-dozer 
+        	camel-jackson
+        	camel-jsonpath
+        	swagger 
+        	activemq-camel 
+        	cxf
+        </fabric8.features>
+        <fabric8.bundles>
+            <!-- Third-party bundles -->
+            wrap:mvn:com.timgroup/java-statsd-client/3.0.1
+            wrap:mvn:javax.mail/javax.mail-api/1.5.4
+            mvn:com.fasterxml.jackson.core/jackson-annotations/${com.fasterxml.jackson.version}
+            mvn:com.fasterxml.jackson.core/jackson-databind/${com.fasterxml.jackson.version}
+            mvn:com.fasterxml.jackson.core/jackson-core/${com.fasterxml.jackson.version}
+            mvn:com.fasterxml.jackson.datatype/jackson-datatype-joda/${com.fasterxml.jackson.version}
+            mvn:commons-io/commons-io/${commons.io.version}
+            mvn:commons-lang/commons-lang/${commons.lang.version}
+            mvn:commons-pool/commons-pool/${commons.pool.version}
+            mvn:org.apache.commons/commons-email/${commons.email.version}
+            mvn:joda-time/joda-time/${joda.time.version}
+        </fabric8.bundles>
+    </properties>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>fabric8-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>fabric8-zip</id>
+						<phase>package</phase>
+						<goals>
+							<goal>zip</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

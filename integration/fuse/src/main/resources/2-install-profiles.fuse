@@ -1,3 +1,6 @@
+#
+# source mvn:org.vpk.rmt.integration/fuse/1.0.0-SNAPSHOT/fuse/2-install-profiles
+#
 VERSION=${project.version}
 #ENV=$1
 ENV=local
@@ -21,10 +24,12 @@ profile-edit --pid org.ops4j.pax.logging/log4j.logger.io.fabric8.gateway.handler
 profile-edit --pid org.ops4j.pax.logging/log4j.logger.org.apache.cxf=WARN karaf
 
 echo "*** Import profiles ..."
-profile-import mvn:org.vpk.rmt/serviceproviders/$VERSION/zip/profile
-profile-import mvn:org.vpk.rmt/buienradar-serviceprovider/$VERSION/zip/profile
+# mvn:groupId/artifactId/version/zip/profile
+profile-import mvn:org.vpk.rmt.profiles/parent/$VERSION/zip/profile
+profile-import mvn:org.vpk.rmt.serviceproviders/buienradar/$VERSION/zip/profile
 
-echo "*** Execute script to provision environment ...
+echo "*** Execute script to provision environment ..."
+# mvn:groupId/artifactId/version/type/classifier
 source mvn:org.vpk.rmt.integration/fuse/$VERSION/fuse/3-provision-environment-$ENV
 
 echo "*** Wait for provisioning ..."
