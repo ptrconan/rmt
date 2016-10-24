@@ -25,6 +25,7 @@
     </cm:property-placeholder>
 
     <!-- cxf server e.g. buienradar service provider front end -->
+    <!-- http://0.0.0.0:${port:8401,8420}/rmt/buienradar/v1/nl -->
     <cxf:rsServer
         id="buienradarFrontEnd"
         address="{{frontend.endpoint}}"
@@ -40,6 +41,7 @@
     </cxf:rsServer>
   
     <!-- cxf client e.g. buienradar service provider back end -->
+    <!-- http://www.buienradar.nl -->
 	<cxf:rsClient
         id="buienradarBackEnd"
         address="{{backend.endpoint}}"
