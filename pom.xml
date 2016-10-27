@@ -17,6 +17,9 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.scm.id>git-server</project.scm.id>
 
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+
 		<!--+
 			| Surefire property to have our custom {skip.surefire.tests} default to the skipTests commandline option.
 			| The reason for this is that we | override the <skipTests> setting in the surefire plugin so we can switch

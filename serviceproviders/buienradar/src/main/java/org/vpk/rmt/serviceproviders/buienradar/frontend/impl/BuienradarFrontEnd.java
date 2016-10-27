@@ -5,9 +5,8 @@ import org.vpk.rmt.serviceproviders.buienradar.frontend.api.BuienradarFrontEndAp
 public class BuienradarFrontEnd implements BuienradarFrontEndApi {
 
 	@Override
-	public String getWeatherInformation(String country, String city, String debug) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+    public String getWeatherInformation(String id, String debug) {
+    	return PATH_ROOT;
+    }
+	
 }

@@ -2,56 +2,48 @@ package org.vpk.rmt.serviceproviders.buienradar.frontend.api;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
  * This interface is the endpoint to connect to the buienradar front end.
  */
-@Path(BuienradarFrontEndApi.PATH_ROOT)
-@Api(
-    value = BuienradarFrontEndApi.PATH_ROOT,
-    description = "Rest API providing Buienradar front end services.",
-    produces = BuienradarFrontEndApi.CONTENT_TYPE_JSON_UTF8
-)
+
+/**
+* This Java class with be hosted in the URI path defined by the @Path annotation. @Path annotations on the methods
+* of this class always refer to a path relative to the path defined at the class level.
+* <p/>
+* For example, with 'http://localhost:8181/cxf' as the default CXF servlet path and '/rmt' as the JAX-RS server path,
+* this class will be hosted in 'http://localhost:8181/cxf/rmt/buienradar'.  An @Path("/country") annotation on
+* one of the methods would result in 'http://localhost:8181/cxf/rmt/buienradar/country'.
+*/
+@Path("/buienradar/")
+@Api(value = "/buienradar", description = "Operations about buienradar")
 public interface BuienradarFrontEndApi {
-    String CONTENT_TYPE_JSON_UTF8 = MediaType.APPLICATION_JSON + "; charset=utf-8\"";
+  final String CONTENT_TYPE_XML_UTF8 = MediaType.APPLICATION_XML + "; charset=utf-8\"";
 
-    // path constants
-    String PATH_ROOT = "/";
-    String PATH_WEATHER = "/weather/{country}";
+  // path constants
+  final String PATH_ROOT = "<blueprint2/>";
 
-    // parameter constants
-    String PARAM_COUNTRY = "country";
-    String PARAM_CITY = "city";
-    String PARAM_DEBUG = "debug";
+  // parameter constants
+  final String PARAM_DEBUG = "debug";
 
-    /**
-     * $/weather/{country}?{city}
-     *
-     * This method fetches the weather information for a country.
-     *
-     * @param debug
-     *  Flag to indicate if debug information is to be provided.
-     *
-     * @return
-     *  The weather information for a country.
-     * @since
-     *  1.0.0
-     */
-    @GET
-    @Path(PATH_WEATHER)
-    @Produces(CONTENT_TYPE_JSON_UTF8)
-    @ApiOperation(value = PATH_WEATHER, httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
-    String getWeatherInformation(
-        @PathParam(PARAM_COUNTRY) String country,
-        @QueryParam(PARAM_CITY) String city,
-        @HeaderParam(PARAM_DEBUG) String debug
-    );
+
+  @GET
+  @Path("/country/{id}")
+  @Produces(CONTENT_TYPE_XML_UTF8)
+  @ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
+  @ApiResponses(value = {
+  		@ApiResponse(code = 500, message = "Invalid id supplied")
+  		})
+  public String getWeatherInformation(@ApiParam(value = "ID of country to fetch", required = true) @PathParam("id") String id, @HeaderParam(PARAM_DEBUG) String debug);
+	
 }

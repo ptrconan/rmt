@@ -14,35 +14,42 @@
 	<name>RMT :: Serviceproviders :: Buienradar</name>
 	<description>RMT Buienradar Serviceprovider</description>
 
-<!--
 	<properties>
-		<fabric8.profile>${project.groupId}-serviceproviders.buienradar</fabric8.profile>
-		<fabric8.parentProfiles>org.vpk.rmt.serviceproviders.profile</fabric8.parentProfiles>
+		<fabric8.profile>${project.groupId}-buienradar</fabric8.profile>
+		<!-- fabric8.parentProfiles>org.vpk.rmt.profiles-parent.profile feature-cxf</fabric8.parentProfiles -->
+		<fabric8.parentProfiles>feature-cxf</fabric8.parentProfiles>
 		<fabric8.features>
-			camel-core
-			transaction
-			camel-jetty
-			jetty
-			jsr-311
-			camel-velocity
-			camel-servlet
+        	swagger 
+            cxf-jaxrs
 		</fabric8.features>
-		<fabric8.bundles />
+		<!--
 		<fabric8.bundles>
-			mvn:org.vpk.rmt/buienradar-service-provider/${project.version}
+			mvn:org.vpk.rmt.serviceproviders/buienradar/${project.version}
 		</fabric8.bundles>
 		<fabric8.featureRepos />
+		  -->
 	</properties>
--->	
 	
 	<dependencies>
-		<!--+
-			| vpk dependencies, sorted by alphabet
-			+-->
+		<!--
+			For coding the example, we don't actually depend on any CXF classes - we only use the JAX-RS (JSR-339)
+			standard annotations and API
+		-->
+		<dependency>
+			<groupId>org.apache.servicemix.specs</groupId>
+			<artifactId>org.apache.servicemix.specs.jsr339-api-2.0</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
-		<!--+
-			| non-vpk dependencies, sorted by alphabet
-			+-->
+		<!--
+			For logging, we will use SLF4J, which is also available in the container by default.
+		-->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	
 		<dependency>
 			<!-- Used for swagger -->
 			<groupId>com.wordnik</groupId>
@@ -58,97 +65,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.dozer</groupId>
-			<artifactId>dozer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-cxf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-cxf-transport</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jackson</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-servlet</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-velocity</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-databinding-jaxb</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>asm</artifactId>
-					<groupId>asm</groupId>
-				</exclusion>
-			</exclusions>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<scope>provided</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-extension-providers</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http-jetty</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jettison</groupId>
-			<artifactId>jettison</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-joda</artifactId>
-			<version>${com.fasterxml.jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-
-		<!--+
-			| Test dependencies, sorted by alphabet
-			+-->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>xmlunit</groupId>
-			<artifactId>xmlunit</artifactId>
-			<version>1.6</version>
-			<scope>test</scope>
-		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -160,9 +81,29 @@
 				<configuration>
 					<instructions>
 						<Import-Package>
-                            javax.ws.rs.core,
+							javax.ws.rs,
+							javax.ws.rs.core,
+							javax.xml.bind.annotation,
+							org.osgi.service.blueprint,
+							com.wordnik.swagger.jaxrs.config,
+							com.wordnik.swagger.jaxrs.listing,
+							com.wordnik.swagger.annotations,
+							org.apache.cxf.transport.http,
+							io.fabric8.cxf,
+							javax.annotation;version="[1.1.0,2.0.0)",
+							com.fasterxml.jackson.annotation,
+							com.fasterxml.jackson.core,
+							com.fasterxml.jackson.databind,
+							com.fasterxml.jackson.jaxrs.json,
+							javax.ws.rs.ext,
 							*
 						</Import-Package>
+						<Import-Service>org.apache.aries.blueprint.NamespaceHandler;
+							osgi.service.blueprint.namespace=http://cxf.apache.org/transports/http/configuration
+						</Import-Service>
+						<Export-Package>
+							org.vpk.rmt.serviceproviders.buienradar
+						</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
