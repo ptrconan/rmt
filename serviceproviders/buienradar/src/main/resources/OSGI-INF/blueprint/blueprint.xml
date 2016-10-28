@@ -60,27 +60,35 @@
             </bean>
         </jaxrs:features>
     </jaxrs:server>
+
+    <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
  
     <!--
  	https://access.redhat.com/documentation/en-US/Red_Hat_JBoss_Fuse/6.2/html/Apache_CXF_Development_Guide/JAXRSEndpointConfig-CltConfig.html
  	-->
- 
+	<jaxrs:client id="buienradarClient"
+       address="http://xml.buienradar.nl/"
+       serviceClass="org.vpk.rmt.serviceproviders.buienradar.backend.api.BuienradarBackEnd"/>
+        
     <cxf:bus>
         <cxf:features>
           <cxf:logging />
         </cxf:features>
     </cxf:bus>
 
+	<!-- https://github.com/LibertyGlobal/MES/blob/Integration/mes/mes-datastore-elasticsearch/src/main/resources/OSGI-INF/blueprint/datastore.xml -->
+	<!-- https://github.com/LibertyGlobal/MES/blob/Integration/mes/mes-server/mes-server-impl-datastore/src/main/resources/OSGI-INF/blueprint/blueprint.xml -->
+	<service interface="org.vpk.rmt.serviceproviders.buienradar.frontend.api.BuienradarFrontEnd" ref="buienradarFrontEnd" />
+	
     <!--
       We are using the OSGi Blueprint XML syntax to define a bean that we referred to in our JAX-RS server setup.
       This bean carries a set of JAX-RS annotations that allow its methods to be mapped to incoming requests.
     -->
-    <bean id="buienradarFrontEnd" class="org.vpk.rmt.serviceproviders.buienradar.frontend.impl.BuienradarFrontEnd" />
-
+    <bean id="buienradarFrontEnd" class="org.vpk.rmt.serviceproviders.buienradar.frontend.impl.BuienradarFrontEndImpl" />
+	
     <!-- cxf providers -->
     <!--
     <bean id="objectMapperProvider" class="org.vpk.rmt.serviceproviders.util.ObjectMapperProvider"/>
     -->
-    <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
 
 </blueprint>

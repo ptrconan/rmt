@@ -1,8 +1,8 @@
 package org.vpk.rmt.serviceproviders.buienradar.frontend.impl;
 
-import org.vpk.rmt.serviceproviders.buienradar.frontend.api.BuienradarFrontEndApi;
+import org.vpk.rmt.serviceproviders.buienradar.frontend.api.BuienradarFrontEnd;
 
-public class BuienradarFrontEnd implements BuienradarFrontEndApi {
+public class BuienradarFrontEndImpl implements BuienradarFrontEnd {
 
 	@Override
     public String getWeatherInformation(String id, String debug) {

@@ -27,7 +27,7 @@ import javax.ws.rs.core.MediaType;
 */
 @Path("/buienradar/")
 @Api(value = "/buienradar", description = "Operations about buienradar")
-public interface BuienradarFrontEndApi {
+public interface BuienradarFrontEnd {
   final String CONTENT_TYPE_XML_UTF8 = MediaType.APPLICATION_XML + "; charset=utf-8\"";
 
   // path constants
