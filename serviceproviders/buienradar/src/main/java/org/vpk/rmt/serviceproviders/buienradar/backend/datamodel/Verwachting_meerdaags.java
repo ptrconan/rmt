@@ -3,20 +3,15 @@ package org.vpk.rmt.serviceproviders.buienradar.backend.datamodel;
 public class Verwachting_meerdaags {
 	private Tekst_lang tekst_lang;
 
-	private Dag-
-	plus5 dag-plus5;
+	private Dag_plus5 dag_plus5;
 
-	private Dag-
-	plus4 dag-plus4;
+	private Dag_plus4 dag_plus4;
 
-	private Dag-
-	plus3 dag-plus3;
+	private Dag_plus3 dag_plus3;
 
-	private Dag-
-	plus2 dag-plus2;
+	private Dag_plus2 dag_plus2;
 
-	private Dag-
-	plus1 dag-plus1;
+	private Dag_plus1 dag_plus1;
 
 	private String urlbackup;
 
@@ -32,76 +27,54 @@ public class Verwachting_meerdaags {
 		this.tekst_lang = tekst_lang;
 	}
 
-	public Dag-
-
-	plus5 getDag-
-
-	plus5 ()
+	public Dag_plus5 getDag_plus5 ()
     {
-        return dag-plus5;
+        return dag_plus5;
     }
 
-	public void setDag-
-
-	plus5 (Dag-plus5 dag-plus5)
+	public void setDag_plus5 (Dag_plus5 dag_plus5)
     {
-        this.dag-plus5 = dag-plus5;
+        this.dag_plus5 = dag_plus5;
     }
 
-    public Dag-plus4 getDag-
-
-	plus4 ()
+    public Dag_plus4 getDag_plus4 ()
     {
-        return dag-plus4;
+        return dag_plus4;
     }
 
-	public void setDag-
-
-	plus4 (Dag-plus4 dag-plus4)
+	public void setDag_plus4 (Dag_plus4 dag_plus4)
     {
-        this.dag-plus4 = dag-plus4;
+        this.dag_plus4 = dag_plus4;
     }
 
-    public Dag-plus3 getDag-
-
-	plus3 ()
+    public Dag_plus3 getDag_plus3 ()
     {
-        return dag-plus3;
+        return dag_plus3;
     }
 
-	public void setDag-
-
-	plus3 (Dag-plus3 dag-plus3)
+	public void setDag_plus3 (Dag_plus3 dag_plus3)
     {
-        this.dag-plus3 = dag-plus3;
+        this.dag_plus3 = dag_plus3;
     }
 
-    public Dag-plus2 getDag-
-
-	plus2 ()
+    public Dag_plus2 getDag_plus2 ()
     {
-        return dag-plus2;
+        return dag_plus2;
     }
 
-	public void setDag-
-
-	plus2 (Dag-plus2 dag-plus2)
+	public void setDag_plus2 (Dag_plus2 dag_plus2)
     {
-        this.dag-plus2 = dag-plus2;
+        this.dag_plus2 = dag_plus2;
     }
 
-    public Dag-plus1 getDag-
-
-	plus1 ()
+    public Dag_plus1 getDag_plus1 ()
     {
-        return dag-plus1;
+        return dag_plus1;
     }
 
-	public void setDag-
-
-	plus1 (Dag-plus1 dag-plus1)
+	public void setDag_plus1 (Dag_plus1 dag_plus1)
     {
-        this.dag-plus1 = dag-plus1;
+        this.dag_plus1 = dag_plus1;
     }
 
 	public String getUrlbackup() {
@@ -130,8 +103,8 @@ public class Verwachting_meerdaags {
 
 	@Override
 	public String toString() {
-		return "ClassPojo [tekst_lang = " + tekst_lang + ", dag-plus5 = " + dag - plus5 + ", dag-plus4 = " + dag - plus4
-				+ ", dag-plus3 = " + dag - plus3 + ", dag-plus2 = " + dag - plus2 + ", dag-plus1 = " + dag - plus1
+		return "ClassPojo [tekst_lang = " + tekst_lang + ", dag_plus5 = " + dag_plus5 + ", dag_plus4 = " + dag_plus4
+				+ ", dag_plus3 = " + dag_plus3 + ", dag_plus2 = " + dag_plus2 + ", dag_plus1 = " + dag_plus1
 				+ ", urlbackup = " + urlbackup + ", tekst_middellang = " + tekst_middellang + ", url = " + url + "]";
 	}
 }
