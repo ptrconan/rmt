@@ -8,6 +8,10 @@ public class BuienradarServerImpl implements BuienradarServer {
 
 	private BuienradarClient buienradarClient;
 	
+	public BuienradarServerImpl(BuienradarClient buienradarClient) {
+		this.buienradarClient = buienradarClient;
+	}
+
 	public void setBuienradarClient(BuienradarClient buienradarClient) {
 		this.buienradarClient = buienradarClient;
 	}

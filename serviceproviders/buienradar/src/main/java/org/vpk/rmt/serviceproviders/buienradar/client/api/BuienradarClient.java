@@ -40,7 +40,7 @@ public interface BuienradarClient {
     @GET
     @Path(PATH_ROOT)
     @Produces(CONTENT_TYPE_XML_UTF8)
-    @ApiOperation(value = PATH_ROOT, httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
+    @ApiOperation(value = PATH_ROOT, httpMethod = "GET", notes = "This will return the weather information for a country.", response = Buienradarnl.class)
     Buienradarnl getWeatherInformation();
 
 }
