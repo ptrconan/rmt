@@ -14,8 +14,9 @@
     <!--
     <cm:property-placeholder id="buienradarProfileConfiguration" persistent-id="org.vpk.rmt.serviceproviders.buienradar">
         <cm:default-properties>
-            <cm:property name="frontend.endpoint"	value="UNDEFINED" />
-            <cm:property name="backend.endpoint"	value="UNDEFINED" />
+            <cm:property name="server.endpoint"	value="UNDEFINED" />
+            <cm:property name="client.endpoint"	value="UNDEFINED" />
+            <cm:property name="client.timeout"	value="UNDEFINED" />
         </cm:default-properties>
     </cm:property-placeholder>
 	-->
@@ -42,7 +43,7 @@
     -->
     <jaxrs:server id="buienradarServer" address="/rmt">
         <jaxrs:serviceBeans>
-            <ref component-id="buienradarFrontEnd"/>
+            <ref component-id="buienradarServerImpl"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
         	<!--
@@ -65,15 +66,15 @@
  	https://access.redhat.com/documentation/en-US/Red_Hat_JBoss_Fuse/6.2/html/Apache_CXF_Development_Guide/JAXRSEndpointConfig-CltConfig.html
  	-->
 	<jaxrs:client id="buienradarClient" 
-		address="${backend.endpoint}"
-		serviceClass="org.vpk.rmt.serviceproviders.buienradar.backend.api.BuienradarBackEnd">
+		address="${client.endpoint}"
+		serviceClass="org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient">
 		<jaxrs:properties>
-			<entry key="ReceiveTimeout" value="${backend.timeout}" />			
+			<entry key="ReceiveTimeout" value="${client.timeout}" />			
 		</jaxrs:properties>
 	</jaxrs:client>
 
 	<!-- register the frontend api as an osgi service -->
-	<service interface="org.vpk.rmt.serviceproviders.buienradar.frontend.api.BuienradarFrontEnd" ref="buienradarFrontEnd" />
+	<service interface="org.vpk.rmt.serviceproviders.buienradar.server.api.BuienradarServer" ref="buienradarServerImpl" />
 	
     <cxf:bus>
         <cxf:features>
@@ -86,9 +87,9 @@
       the JAX-RS server setup and the OSGI service setup.
       This bean carries a set of JAX-RS annotations that allow its methods to be mapped to incoming requests.
     -->
-    <bean id="buienradarFrontEnd" class="org.vpk.rmt.serviceproviders.buienradar.frontend.impl.BuienradarFrontEndImpl">
+    <bean id="buienradarServerImpl" class="org.vpk.rmt.serviceproviders.buienradar.server.impl.BuienradarServerImpl">
         <!-- will be using the backend api -->
-        <property name="buienradarBackEnd" ref="buienradarClient" />
+        <property name="buienradarClient" ref="buienradarClient" />
     </bean>
 	
     <!-- cxf providers -->
