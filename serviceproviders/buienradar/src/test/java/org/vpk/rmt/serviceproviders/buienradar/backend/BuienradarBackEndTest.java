@@ -5,6 +5,7 @@ import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 
 import org.junit.Test;
 import org.vpk.rmt.serviceproviders.buienradar.backend.api.BuienradarBackEnd;
+import org.vpk.rmt.serviceproviders.buienradar.backend.datamodel.Buienradarnl;
 
 public class BuienradarBackEndTest {
 
@@ -16,7 +17,7 @@ public class BuienradarBackEndTest {
 	@Test
 	public void test2() {
 		BuienradarBackEnd buienradarBackEnd = JAXRSClientFactory.create("http://xml.buienradar.nl", BuienradarBackEnd.class);
-		String response = buienradarBackEnd.getWeatherInformation();
+		Buienradarnl response = buienradarBackEnd.getWeatherInformation();
 		//<buienradarnl><weergegevens
 		
 		assertEquals("result should be true", true, true);

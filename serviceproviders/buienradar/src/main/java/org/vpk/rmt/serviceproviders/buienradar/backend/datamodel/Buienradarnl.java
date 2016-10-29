@@ -1,5 +1,7 @@
 package org.vpk.rmt.serviceproviders.buienradar.backend.datamodel;
 
+//http://cxf.apache.org/docs/jax-rs-client-api.html#JAX-RSClientAPI-CreatingclientsprogrammaticallywithnoSpringdependencies
+
 public class Buienradarnl {
     private Weergegevens weergegevens;
 

@@ -8,6 +8,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.vpk.rmt.serviceproviders.buienradar.backend.datamodel.Buienradarnl;
+
 /**
  * This interface is the endpoint to connect to the buienradar back end.
  */
@@ -39,6 +41,6 @@ public interface BuienradarBackEnd {
     @Path(PATH_ROOT)
     @Produces(CONTENT_TYPE_XML_UTF8)
     @ApiOperation(value = PATH_ROOT, httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
-    String getWeatherInformation();
+    Buienradarnl getWeatherInformation();
 
 }
