@@ -14,7 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * This interface is the endpoint to connect to the buienradar front end.
+ * This is the endpoint to connect to the Buienradar server API.
  */
 
 /**
@@ -26,24 +26,22 @@ import javax.ws.rs.core.MediaType;
 * one of the methods would result in 'http://localhost:8181/cxf/rmt/buienradar/country'.
 */
 @Path("/buienradar/")
-@Api(value = "/buienradar", description = "Operations about buienradar")
+@Api(
+	value = "Buienradar server API",
+	description = "RESTfull Buienradar server API"
+)
 public interface BuienradarServer {
-  final String CONTENT_TYPE_XML_UTF8 = MediaType.APPLICATION_XML + "; charset=utf-8\"";
 
-  // path constants
-  final String PATH_ROOT = "<blueprint2/>";
+	final String apiProduces = MediaType.APPLICATION_XML + "; charset=utf-8\"";
+	final String paramDebug = "debug";
 
-  // parameter constants
-  final String PARAM_DEBUG = "debug";
+	@GET
+	@Path("/nl/{station}")
+	@Produces(BuienradarServer.apiProduces)
+	//@ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
+	//@ApiResponses(value = { @ApiResponse(code = 500, message = "Invalid id supplied") })
+	public String getWeatherInformation(
+			@ApiParam(value = "The name of the weather station from which to fetch weather information.", required = true) @PathParam("station") String stationName,
+			@HeaderParam(paramDebug) String debug);
 
-
-  @GET
-  @Path("/country/{id}")
-  @Produces(CONTENT_TYPE_XML_UTF8)
-  @ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
-  @ApiResponses(value = {
-  		@ApiResponse(code = 500, message = "Invalid id supplied")
-  		})
-  public String getWeatherInformation(@ApiParam(value = "ID of country to fetch", required = true) @PathParam("id") String id, @HeaderParam(PARAM_DEBUG) String debug);
-	
 }

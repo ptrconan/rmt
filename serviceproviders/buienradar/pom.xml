@@ -69,7 +69,28 @@
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
+		<!-- Jackson-based JAX-RS provider that can automatically serialize and deserialize resources for JSON content type (MediaType). -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	
+		<!-- Jackson-based JAX-RS provider that can automatically serialize and deserialize resources for XML content type (MediaType). -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-xml-provider</artifactId>
+			<version>${com.fasterxml.jackson.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-rs-client</artifactId>
@@ -85,7 +106,36 @@
 	</dependencies>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.jvnet.jaxb2.maven2</groupId>
+					<artifactId>maven-jaxb2-plugin</artifactId>
+					<!-- version set back from 0.12.3 to 0.12.1 because Eclipse errors on unit tests -->
+					<version>0.12.1</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<configuration>
+					<!--
+						generate the xsd for example online
+						site: http://www.freeformatter.com/xsd-generator.html
+						XSD design: Salami Slice
+					-->
+					<generatePackage>org.vpk.rmt.serviceproviders.buienradar.client.datamodel</generatePackage>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
@@ -107,6 +157,7 @@
 							com.fasterxml.jackson.core,
 							com.fasterxml.jackson.databind,
 							com.fasterxml.jackson.jaxrs.json,
+							com.fasterxml.jackson.jaxrs.xml,
 							javax.ws.rs.ext,
 							*
 						</Import-Package>
