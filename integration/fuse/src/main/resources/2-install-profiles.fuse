@@ -30,7 +30,6 @@ profile-edit --pid io.fabric8.agent/org.ops4j.pax.url.mvn.repositories=http://lo
 
 echo "*** Import profiles ..."
 # mvn:groupId/artifactId/version/zip/profile
-profile-import mvn:org.vpk.rmt.profiles/parent/$VERSION/zip/profile
 profile-import mvn:org.vpk.rmt.serviceproviders/buienradar/$VERSION/zip/profile
 
 echo "*** Execute next script in sequence ..."

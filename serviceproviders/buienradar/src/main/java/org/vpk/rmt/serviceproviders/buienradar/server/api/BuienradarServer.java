@@ -31,7 +31,7 @@ import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
 @Path("/buienradar/")
 @Api(
 	value = "Buienradar server API",
-	description = "RESTfull Buienradar server API"
+	description = "The Buienradar server API"
 )
 public interface BuienradarServer {
 
@@ -41,8 +41,8 @@ public interface BuienradarServer {
 	@GET
 	@Path("/nl/{station}")
 	@Produces(BuienradarServer.apiProduces)
-	//@ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
-	//@ApiResponses(value = { @ApiResponse(code = 500, message = "Invalid id supplied") })
+	@ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "Invalid id supplied") })
 	public Weerstation getWeatherInformation(
 			@ApiParam(value = "The name of the weather station from which to fetch weather information.", required = true) @PathParam("station") String stationName,
 			@HeaderParam(paramDebug) String debug);

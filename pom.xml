@@ -54,10 +54,6 @@
 		<jsonassert-version>1.2.3</jsonassert-version>
 		<com.fasterxml.jackson.version>2.4.3</com.fasterxml.jackson.version>
 		<com.wordnik.swagger.version>1.3.2</com.wordnik.swagger.version>
-		<commons.email.version>1.4</commons.email.version>
-		<commons.io.version>2.4</commons.io.version>
-		<!-- Version in-line with version in org.apache.cxf:cxf-rt-frontend-jaxrs:jar:3.0.4.redhat-620133:compile -->
-		<javax.ws.rs.version>2.0.1</javax.ws.rs.version>
 	</properties>
 
 	<modules>
