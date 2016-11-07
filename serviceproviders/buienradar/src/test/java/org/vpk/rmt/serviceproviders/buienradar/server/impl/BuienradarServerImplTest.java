@@ -29,13 +29,13 @@ public class BuienradarServerImplTest {
 		
 		Weerstation weerstation1 = new Weerstation();
 		Stationnaam stationnaam1 = new Stationnaam();
-		stationnaam1.setValue("Eindhoven");
+		stationnaam1.setRegio("Eindhoven");
 		weerstation1.setStationnaam(stationnaam1);
 		weerstation1.setTemperatuurGC(11.1f);
 
 		Weerstation weerstation2 = new Weerstation();
 		Stationnaam stationnaam2 = new Stationnaam();
-		stationnaam2.setValue("Son");
+		stationnaam2.setRegio("Son");
 		weerstation2.setStationnaam(stationnaam2);
 		weerstation2.setTemperatuurGC(22.2f);
 		
@@ -49,9 +49,9 @@ public class BuienradarServerImplTest {
 		BuienradarServerImpl buienradarServerImpl = new BuienradarServerImpl();
 		buienradarServerImpl.setBuienradarClient(buienradarClient);
 		
-		String response = buienradarServerImpl.getWeatherInformation("Eindhoven", "false");
+		Weerstation response = buienradarServerImpl.getWeatherInformation("Eindhoven", "false");
 		
-		assertEquals("Response is not as expected, ", "11.1", response);
+		assertEquals("Response is not as expected, ", "11.1", String.valueOf(response.getTemperatuurGC()));
 	}
 
 }

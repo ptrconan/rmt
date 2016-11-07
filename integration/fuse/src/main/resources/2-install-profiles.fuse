@@ -5,6 +5,8 @@ VERSION=${project.version}
 #ENV=$1
 ENV=local
 
+echo "*** Script to set the default version and to install profiles ..."
+
 echo "*** Wait for provisioning ..."
 wait-for-provisioning
 
@@ -23,12 +25,15 @@ echo "*** Configure log settings in karaf profile ..."
 profile-edit --pid org.ops4j.pax.logging/log4j.logger.io.fabric8.gateway.handlers=WARN karaf
 profile-edit --pid org.ops4j.pax.logging/log4j.logger.org.apache.cxf=WARN karaf
 
+echo "*** Configure the Maven repo in the default profile ..."
+profile-edit --pid io.fabric8.agent/org.ops4j.pax.url.mvn.repositories=http://localhost:8081/nexus/content/groups/public@id=vpk-nexus-release-public-repository default
+
 echo "*** Import profiles ..."
 # mvn:groupId/artifactId/version/zip/profile
 profile-import mvn:org.vpk.rmt.profiles/parent/$VERSION/zip/profile
 profile-import mvn:org.vpk.rmt.serviceproviders/buienradar/$VERSION/zip/profile
 
-echo "*** Execute script to provision environment ..."
+echo "*** Execute next script in sequence ..."
 # mvn:groupId/artifactId/version/type/classifier
 source mvn:org.vpk.rmt.integration/fuse/$VERSION/fuse/3-provision-environment-$ENV
 
@@ -36,4 +41,3 @@ echo "*** Wait for provisioning ..."
 sleep --second 5 
 wait-for-provisioning
 
-echo "*** Done."

@@ -1,35 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
-    xmlns:cxf="http://cxf.apache.org/blueprint/core"
+    xmlns:jaxrs-server="http://cxf.apache.org/blueprint/jaxrs"
+    xmlns:jaxrs-client="http://cxf.apache.org/blueprint/jaxrs-client"
     xsi:schemaLocation="
       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
       http://cxf.apache.org/blueprint/jaxrs http://cxf.apache.org/schemas/blueprint/jaxrs.xsd
-      http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd">
+      http://cxf.apache.org/blueprint/jaxrs-client http://cxf.apache.org/schemas/blueprint/jaxrs-client.xsd">
 
-<!--
-    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
--->
-    <!--
-    <cm:property-placeholder id="buienradarProfileConfiguration" persistent-id="org.vpk.rmt.serviceproviders.buienradar">
-        <cm:default-properties>
-            <cm:property name="server.endpoint"	value="UNDEFINED" />
-            <cm:property name="client.endpoint"	value="UNDEFINED" />
-            <cm:property name="client.timeout"	value="UNDEFINED" />
-        </cm:default-properties>
-    </cm:property-placeholder>
-	-->
-
-    <!-- overwrite properties inherited from the parent profile. -->
-    <!--
-    <cm:property-placeholder id="serviceprovidersProfileConfiguration" persistent-id="org.vpk.rmt.serviceproviders" placeholder-prefix="$(" placeholder-suffix=")" >
-        <cm:default-properties>
-            <cm:property name="cxf.logging.feature"	value="UNDEFINED" />
-        </cm:default-properties>
-    </cm:property-placeholder>
-	-->
-
+	<!--
+	  note on xmlns:jaxrs-client, see http://cxf.apache.org/docs/jax-rs.html comment:
+	    "Also, jaxrs:client elements for injecting proxies have had the namespace changed from 
+	     from "http://cxf.apache.org/jaxrs" to "http://cxf.apache.org/jaxrs-client"."
+	 -->
+    
     <!--
 	https://access.redhat.com/documentation/en-US/Red_Hat_JBoss_Fuse/6.2/html/Apache_CXF_Development_Guide/JAXRSEndpointConfig.html#JAXRSEndpointConfig-SrvConfig
 	-->
@@ -41,19 +25,17 @@
       - a list of service beans
         in this example, we refer to another bean defined in this Blueprint XML file with a <ref/> element
     -->
-    <jaxrs:server id="buienradarServer"
-    	address="/rmt"
-		loggingFeatureEnabled="true">
-        <jaxrs:serviceBeans>
+    <jaxrs-server:server id="buienradarServer" address="/rmt">
+        <jaxrs-server:serviceBeans>
             <ref component-id="buienradarServerImpl"/>
-        </jaxrs:serviceBeans>
-        <jaxrs:providers>
+        </jaxrs-server:serviceBeans>
+        <jaxrs-server:providers>
         	<!--
            	<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
-           	-->
-           <ref component-id="jsonProvider"/>
-        </jaxrs:providers>
-        <jaxrs:features>
+        	<ref component-id="jsonProvider"/>
+        	-->
+        </jaxrs-server:providers>
+        <jaxrs-server:features>
         	<!-- properties used by http://localhost:9000/cxf/rmt/api-docs info element --> 
             <bean class="io.fabric8.cxf.endpoint.SwaggerFeature">
                 <property name="title" value="RMT - Buienradar Serviceprovider" />
@@ -61,34 +43,40 @@
                 <property name="contact" value="VPK.org" />
                 <property name="version" value="${project.version}" />
             </bean>
-        </jaxrs:features>
-    </jaxrs:server>
+        </jaxrs-server:features>
+    </jaxrs-server:server>
 
     <!--
  	https://access.redhat.com/documentation/en-US/Red_Hat_JBoss_Fuse/6.2/html/Apache_CXF_Development_Guide/JAXRSEndpointConfig-CltConfig.html
- 	-->
+	-->
+	<jaxrs-client:client id="buienradarClient" 
+		address="http://xml.buienradar.nl"
+		serviceClass="org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient" />
+
+	<!--
 	<jaxrs:client id="buienradarClient" 
 		address="${client.endpoint}"
-		serviceClass="org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient"
-		loggingFeatureEnabled="true">
-		<!--
+		serviceClass="org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient" />
         <jaxrs:providers>
 			<ref component-id="xmlProvider" />
         </jaxrs:providers>
-        -->
 		<jaxrs:properties>
 			<entry key="ReceiveTimeout" value="${client.timeout}" />			
 		</jaxrs:properties>
 	</jaxrs:client>
+	-->
 
 	<!-- register the server api as an osgi service -->
+	<!--
 	<service interface="org.vpk.rmt.serviceproviders.buienradar.server.api.BuienradarServer" ref="buienradarServerImpl" />
-	
+	-->
+	<!--
     <cxf:bus>
         <cxf:features>
           <cxf:logging />
         </cxf:features>
     </cxf:bus>
+	-->
 	
     <!--
       We are using the OSGi Blueprint XML syntax to define a bean that we refer to in both
@@ -103,8 +91,7 @@
     <!-- cxf providers -->
     <!--
     <bean id="objectMapperProvider" class="org.vpk.rmt.serviceproviders.util.ObjectMapperProvider"/>
-    -->
-    <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
     <bean id="xmlProvider" class="com.fasterxml.jackson.jaxrs.xml.JacksonXMLProvider" />
+    -->
 
 </blueprint>

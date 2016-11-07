@@ -2,19 +2,26 @@
 # source mvn:org.vpk.rmt.integration/fuse/1.0.0-SNAPSHOT/fuse/4-create-child-containers root
 #
 PARENT_CONTAINER=$1
+# the next credentials should match the ones present in the users.properties
+JMX_USR=admin
+JMX_PWD=admin
+echo "*** Script to create child containers and assign profiles ..."
 
 echo "*** Create child containers for parent container: $PARENT_CONTAINER ..."
 container-create-child --jvm-opts '-Xmx512m -Xdebug -Xrunjdwp:transport=dt_socket,address=5101,server=y,suspend=n' \
-	--profile gateway-http \
+	--profile gateway-http --jmx-user $JMX_USR --jmx-password $JMX_PWD \
 	$PARENT_CONTAINER rmt-http-gateway
 
+#container-create-child --jvm-opts '-Xmx512m -Xdebug -Xrunjdwp:transport=dt_socket,address=5102,server=y,suspend=n -Dcontainer.country=nl' \
+#	--profile org.vpk.rmt.profiles-parent.profile --jmx-user $JMX_USR --jmx-password $JMX_PWD \
+#	$PARENT_CONTAINER rmt-serviceproviders
+
 container-create-child --jvm-opts '-Xmx512m -Xdebug -Xrunjdwp:transport=dt_socket,address=5102,server=y,suspend=n -Dcontainer.country=nl' \
-	--profile org.vpk.rmt.profiles-parent.profile \
+	--profile org.vpk.rmt.serviceproviders-buienradar --jmx-user $JMX_USR --jmx-password $JMX_PWD \
 	$PARENT_CONTAINER rmt-serviceproviders
 
 echo "*** Wait for provisioning ..."
 wait-for-provisioning
 
-echo "*** Assign rmt profiles to child containers ..."
-container-add-profile rmt-serviceproviders \
-	org.vpk.rmt.serviceproviders-buienradar
+#echo "*** Assign rmt profiles to child containers ..."
+#container-add-profile rmt-serviceproviders org.vpk.rmt.serviceproviders-buienradar

@@ -15,31 +15,20 @@
 	<description>RMT Buienradar Serviceprovider</description>
 
 	<properties>
-		<fabric8.profile>${project.groupId}-buienradar</fabric8.profile>
-		<!-- fabric8.parentProfiles>org.vpk.rmt.profiles-parent.profile feature-cxf</fabric8.parentProfiles -->
-		<fabric8.parentProfiles>feature-cxf</fabric8.parentProfiles>
-		<fabric8.features>
-        	swagger 
-            cxf-jaxrs
-		</fabric8.features>
-		<!--
-		<fabric8.bundles>
-			mvn:org.vpk.rmt.serviceproviders/buienradar/${project.version}
-		</fabric8.bundles>
-		<fabric8.featureRepos />
-		  -->
+		<fabric8:profile>${project.groupId}-buienradar</fabric8:profile>
+		<fabric8:parentProfiles>feature-cxf</fabric8:parentProfiles>
 	</properties>
 	
 	<dependencies>
 		<!--
 			For coding the example, we don't actually depend on any CXF classes - we only use the JAX-RS (JSR-339)
 			standard annotations and API
-		-->
 		<dependency>
 			<groupId>org.apache.servicemix.specs</groupId>
 			<artifactId>org.apache.servicemix.specs.jsr339-api-2.0</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		-->
 
 		<!--
 			For logging, we will use SLF4J, which is also available in the container by default.
@@ -67,7 +56,7 @@
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- Jackson-based JAX-RS provider that can automatically serialize and deserialize resources for JSON content type (MediaType). -->
@@ -76,15 +65,13 @@
 			<artifactId>jackson-jaxrs-json-provider</artifactId>
 			<scope>provided</scope>
 		</dependency>
-	
-		<!-- Jackson-based JAX-RS provider that can automatically serialize and deserialize resources for XML content type (MediaType). -->
+	<!--
 		<dependency>
-			<groupId>com.fasterxml.jackson.jaxrs</groupId>
-			<artifactId>jackson-jaxrs-xml-provider</artifactId>
-			<version>${com.fasterxml.jackson.version}</version>
-			<scope>provided</scope>
+			<groupId>javax.ws.rs</groupId>
+		    <artifactId>javax.ws.rs-api</artifactId>
+		    <version>${javax.ws.rs.version}</version>
 		</dependency>
-	
+	-->		
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -142,46 +129,18 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Import-Package>
-							javax.ws.rs,
-							javax.ws.rs.core,
-							javax.xml.bind.annotation,
-							org.osgi.service.blueprint,
-							com.wordnik.swagger.jaxrs.config,
-							com.wordnik.swagger.jaxrs.listing,
-							com.wordnik.swagger.annotations,
-							org.apache.cxf.transport.http,
-							io.fabric8.cxf,
-							javax.annotation;version="[1.1.0,2.0.0)",
-							com.fasterxml.jackson.annotation,
-							com.fasterxml.jackson.core,
-							com.fasterxml.jackson.databind,
-							com.fasterxml.jackson.jaxrs.json,
-							com.fasterxml.jackson.jaxrs.xml,
-							javax.ws.rs.ext,
-							*
-						</Import-Package>
+						<!--
+						<Import-Package />
 						<Import-Service>org.apache.aries.blueprint.NamespaceHandler;
 							osgi.service.blueprint.namespace=http://cxf.apache.org/transports/http/configuration
 						</Import-Service>
 						<Export-Package>
 							org.vpk.rmt.serviceproviders.buienradar
 						</Export-Package>
+						-->
+						<Export-Package>!*</Export-Package>
 					</instructions>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>fabric8-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>fabric8-zip</id>
-						<phase>package</phase>
-						<goals>
-							<goal>zip</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

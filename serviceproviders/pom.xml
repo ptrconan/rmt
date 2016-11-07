@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>buienradar</module>
+		<module>buienradar_feature</module>
 	</modules>
 
 </project>

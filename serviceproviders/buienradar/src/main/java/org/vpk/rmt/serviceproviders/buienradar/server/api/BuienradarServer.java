@@ -13,6 +13,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
+
 /**
  * This is the endpoint to connect to the Buienradar server API.
  */
@@ -22,7 +24,8 @@ import javax.ws.rs.core.MediaType;
 * of this class always refer to a path relative to the path defined at the class level.
 * <p/>
 * For example, with 'http://localhost:8181/cxf' as the default CXF servlet path and '/rmt' as the JAX-RS server path,
-* this class will be hosted in 'http://localhost:8181/cxf/rmt/buienradar'.  An @Path("/country") annotation on
+* this class will be hosted in 'http://localhost:8181/cxf/rmt/buienradar'.
+* A @Path("/{station}") annotation on
 * one of the methods would result in 'http://localhost:8181/cxf/rmt/buienradar/country'.
 */
 @Path("/buienradar/")
@@ -40,7 +43,7 @@ public interface BuienradarServer {
 	@Produces(BuienradarServer.apiProduces)
 	//@ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
 	//@ApiResponses(value = { @ApiResponse(code = 500, message = "Invalid id supplied") })
-	public String getWeatherInformation(
+	public Weerstation getWeatherInformation(
 			@ApiParam(value = "The name of the weather station from which to fetch weather information.", required = true) @PathParam("station") String stationName,
 			@HeaderParam(paramDebug) String debug);
 

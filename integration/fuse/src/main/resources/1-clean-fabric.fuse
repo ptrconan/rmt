@@ -1,10 +1,19 @@
+#
+# source mvn:org.vpk.rmt.integration/fuse/1.0.0-SNAPSHOT/fuse/1-clean-fabric
+#
 VERSION=${project.version}
+echo "*** Script to delete child containers and reset the default version ..."
 
-echo "*** Remove existing child containers ..."
+echo "*** Delete rmt-* child containers ..."
 fabric:container-delete rmt-*
 
-echo "*** Set default version to 1.0 (default) ..."
+version-set-default 2.0
+
+echo "*** Delete current version $VERSION ..." $VERSION
+version-delete $VERSION
+
 version-set-default 1.0
 
-echo "*** Delete current version ..."
-version-delete $VERSION
+echo "*** Execute next script in sequence ..."
+# mvn:groupId/artifactId/version/type/classifier
+source mvn:org.vpk.rmt.integration/fuse/$VERSION/fuse/2-install-profiles

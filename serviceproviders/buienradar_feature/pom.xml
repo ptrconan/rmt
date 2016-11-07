@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.vpk.rmt</groupId>
+		<artifactId>serviceproviders</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.vpk.rmt.serviceproviders</groupId>
+	<artifactId>buienradar_feature</artifactId>
+	<packaging>pom</packaging>
+	<name>RMT :: Serviceproviders :: Buienradar :: Feature</name>
+	<description>RMT Buienradar Serviceprovider Feature</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+    		<artifactId>buienradar</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>karaf-maven-plugin</artifactId>
+				<version>4.0.3</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>features-generate-descriptor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+                 <!-- replace the namespace version with the correct one for karaf 2.x, otherwise it will fail deployment on fuse 6.x -->
+                 <groupId>com.google.code.maven-replacer-plugin</groupId>
+                 <artifactId>replacer</artifactId>
+                 <version>1.5.2</version>
+                 <executions>
+                     <execution>
+                         <phase>prepare-package</phase>
+                         <goals>
+                             <goal>replace</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+                 <configuration>
+                     <file>${project.build.directory}/feature/feature.xml</file>
+                     <replacements>
+                         <replacement>
+                             <token>http://karaf.apache.org/xmlns/features/v1.3.0</token>
+                             <value>http://karaf.apache.org/xmlns/features/v1.2.0</value>
+                         </replacement>
+                     </replacements>
+                 </configuration>
+             </plugin>
+		</plugins>
+	</build>
+
+</project>

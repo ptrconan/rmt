@@ -17,19 +17,19 @@ public class BuienradarServerImpl implements BuienradarServer {
 	}
 
 	@Override
-    public String getWeatherInformation(String stationName, String debug) {
+	public Weerstation getWeatherInformation(String stationName, String debug) {
 		Buienradarnl buienradarnl = buienradarClient.getWeatherInformationNl();
 		
 		List<Weerstation> weerStations = buienradarnl.getWeergegevens().getActueelWeer().getWeerstations().getWeerstation();
 		Optional<Weerstation> weerStation = weerStations.stream()
-			.filter(x -> x.getStationnaam().getValue().equals(stationName))
+			.filter(x -> x.getStationnaam().getRegio().equals(stationName))
 			.findFirst();
 		
 		if (weerStation.isPresent()) {
-			return String.valueOf(weerStation.get().getTemperatuurGC());
+			return weerStation.get();
 		}
 		
-    	return "no weather information available";
-    }
+    	return new Weerstation();
+	}
 	
 }

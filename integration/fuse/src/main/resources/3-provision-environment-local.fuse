@@ -7,5 +7,6 @@ echo "*** Configure local environment ..."
 profile-edit --pid org.ops4j.pax.logging/log4j.logger.org.apache.cxf=INFO karaf
 profile-edit --pid org.ops4j.pax.logging/log4j.appender.out.maxFileSize=10MB karaf
 
-echo "*** Execute script to create child containers ..."
+echo "*** Execute next script in sequence ..."
+# mvn:groupId/artifactId/version/type/classifier
 source mvn:org.vpk.rmt.integration/fuse/$VERSION/fuse/4-create-child-containers root
