@@ -61,8 +61,7 @@
 	</properties>
 
 	<modules>
-		<module>integration</module>
-		<module>profiles</module>
+		<module>integration</module>		
 		<module>serviceproviders</module>
 	</modules>
 
