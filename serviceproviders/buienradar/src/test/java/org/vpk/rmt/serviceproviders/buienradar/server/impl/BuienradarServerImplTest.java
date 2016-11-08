@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.junit.Test;
 import org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.ActueelWeer;
@@ -14,7 +13,7 @@ import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Stationnaam;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weergegevens;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstations;
-import org.vpk.rmt.serviceproviders.buienradar.server.impl.BuienradarServerImpl;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
 
 public class BuienradarServerImplTest {
 
@@ -44,14 +43,14 @@ public class BuienradarServerImplTest {
 		actueelWeer.setWeerstations(weerstations);
 		weergegevens.setActueelWeer(actueelWeer);
 		buienradarnl.setWeergegevens(weergegevens);
-		when(buienradarClient.getWeatherInformationNl()).thenReturn(buienradarnl);
+		when(buienradarClient.getBuienradarnl()).thenReturn(buienradarnl);
 		
 		BuienradarServerImpl buienradarServerImpl = new BuienradarServerImpl();
 		buienradarServerImpl.setBuienradarClient(buienradarClient);
 		
-		Weerstation response = buienradarServerImpl.getWeatherInformation("Eindhoven", "false");
+		WeatherInformation response = buienradarServerImpl.getWeatherInformation("Eindhoven", "false");
 		
-		assertEquals("Response is not as expected, ", "11.1", String.valueOf(response.getTemperatuurGC()));
+		assertEquals("Response is not as expected, ", "11.1", String.valueOf(response.getTemperature()));
 	}
 
 }

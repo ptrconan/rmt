@@ -13,7 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
 
 /**
  * This is the endpoint to connect to the Buienradar server API.
@@ -35,15 +35,15 @@ import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
 )
 public interface BuienradarServer {
 
-	final String apiProduces = MediaType.APPLICATION_XML + "; charset=utf-8\"";
-	final String paramDebug = "debug";
+	String apiProduces = MediaType.APPLICATION_JSON + "; charset=utf-8\"";
+	String paramDebug = "debug";
 
 	@GET
 	@Path("/nl/{station}")
 	@Produces(BuienradarServer.apiProduces)
 	@ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Invalid id supplied") })
-	public Weerstation getWeatherInformation(
+	WeatherInformation getWeatherInformation(
 			@ApiParam(value = "The name of the weather station from which to fetch weather information.", required = true) @PathParam("station") String stationName,
 			@HeaderParam(paramDebug) String debug);
 

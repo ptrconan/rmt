@@ -12,7 +12,7 @@ public class BuienradarClientTest {
 	@Test
 	public void testLiveWeerGegevens() {
 		BuienradarClient buienradarClient = JAXRSClientFactory.create("http://xml.buienradar.nl", BuienradarClient.class);
-		Buienradarnl response = buienradarClient.getWeatherInformationNl();
+		Buienradarnl response = buienradarClient.getBuienradarnl();
 
 		assertEquals("Titel is not as expected, ", "www.buienradar.nl - actuele weersinformatie", response.getWeergegevens().getTitel());
 		assertEquals("Omschrijving is not as expected, ", "XML feed weersinformatie", response.getWeergegevens().getOmschrijving());

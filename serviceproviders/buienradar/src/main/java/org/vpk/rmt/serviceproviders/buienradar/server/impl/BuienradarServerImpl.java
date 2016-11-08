@@ -7,6 +7,7 @@ import org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Buienradarnl;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
 import org.vpk.rmt.serviceproviders.buienradar.server.api.BuienradarServer;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
 
 public class BuienradarServerImpl implements BuienradarServer {
 
@@ -17,19 +18,25 @@ public class BuienradarServerImpl implements BuienradarServer {
 	}
 
 	@Override
-	public Weerstation getWeatherInformation(String stationName, String debug) {
-		Buienradarnl buienradarnl = buienradarClient.getWeatherInformationNl();
-		
+	public WeatherInformation getWeatherInformation(String stationName, String debug) {
+		Buienradarnl buienradarnl = buienradarClient.getBuienradarnl();
+
 		List<Weerstation> weerStations = buienradarnl.getWeergegevens().getActueelWeer().getWeerstations().getWeerstation();
-		Optional<Weerstation> weerStation = weerStations.stream()
+		Optional<Weerstation> optionalWeerStation = weerStations.stream()
 			.filter(x -> x.getStationnaam().getRegio().equals(stationName))
 			.findFirst();
-		
-		if (weerStation.isPresent()) {
-			return weerStation.get();
+
+		WeatherInformation weatherInformation = new WeatherInformation();
+		if (optionalWeerStation.isPresent()) {
+			Weerstation weerstation = optionalWeerStation.get();
+			weatherInformation.setHumidity(weerstation.getLuchtvochtigheid());
+			weatherInformation.setLatitude(weerstation.getLat());
+			weatherInformation.setLongitude(weerstation.getLon());
+			weatherInformation.setRegion(weerstation.getStationnaam().getRegio());
+			weatherInformation.setTemperature(weerstation.getTemperatuurGC());
 		}
 		
-    	return new Weerstation();
+    	return weatherInformation;
 	}
 	
 }

@@ -18,24 +18,17 @@ import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Buienradarnl;
 )
 public interface BuienradarClient {
 
-	final String apiRootPath = "/";
-	
-	/**
-     *
+	String apiRootPath = "/";
+
+    /**
      * Get the weather information as present in the XML feed from http://xml.buienradar.nl and transform it into a POJO.
      *
-     * @param debug
-     *  Flag to indicate if debug information is to be provided.
-     *
-     * @return
-     *  The POJO representation of the weather information as present in the XML feed.
-     *  
-     * @since
-     *  1.0.0
+     * @return The POJO representation of the weather information as present in the XML feed.
+     * @since 1.0.0
      */
     @GET
     @Path(BuienradarClient.apiRootPath)
     @ApiOperation(value = "Weather Information for NL", httpMethod = "GET", notes = "Get weather information for NL from http://xml.buienradar.nl", response = Buienradarnl.class)
-    Buienradarnl getWeatherInformationNl();
+    Buienradarnl getBuienradarnl();
 
 }

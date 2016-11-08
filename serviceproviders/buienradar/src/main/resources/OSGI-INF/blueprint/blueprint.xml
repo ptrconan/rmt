@@ -30,10 +30,10 @@
             <ref component-id="buienradarServerImpl"/>
         </jaxrs-server:serviceBeans>
         <jaxrs-server:providers>
-        	<!--
            	<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
-        	<ref component-id="jsonProvider"/>
-        	-->
+            <!--
+            <ref component-id="jsonProvider"/>
+            -->
         </jaxrs-server:providers>
         <jaxrs-server:features>
         	<!-- properties used by http://localhost:9000/cxf/rmt/api-docs info element --> 
