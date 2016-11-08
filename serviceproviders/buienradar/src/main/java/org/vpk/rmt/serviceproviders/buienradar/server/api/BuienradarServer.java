@@ -30,7 +30,7 @@ import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformati
 */
 @Path("/buienradar/")
 @Api(
-	value = "Buienradar server API",
+	value = "/",
 	description = "The Buienradar server API"
 )
 public interface BuienradarServer {

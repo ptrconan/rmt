@@ -28,6 +28,20 @@ public class BuienradarServerImpl implements BuienradarServer {
 
 		WeatherInformation weatherInformation = new WeatherInformation();
 		if (optionalWeerStation.isPresent()) {
+/*	TODO: use extractor
+*         Optional.ofNullable(titleType.getDurationInSeconds())
+                .map(BigInteger::intValue)
+                .ifPresent(descriptiveMetadata::setDuration);
+        //title
+        extractTitle(titleType).ifPresent(title -> descriptiveMetadata.getTitle().add(title));
+        //isAdult
+        Optional.ofNullable(titleType.isIsAdult()).ifPresent(descriptiveMetadata::setIsAdult);
+        //broadcastDate
+        Optional.ofNullable(titleType.getBroadcastDate())
+                .map(XMLGregorianCalendar::toGregorianCalendar)
+                .map(DateTime::new)
+                .ifPresent(descriptiveMetadata::setBroadcastDate);
+* */
 			Weerstation weerstation = optionalWeerStation.get();
 			weatherInformation.setHumidity(weerstation.getLuchtvochtigheid());
 			weatherInformation.setLatitude(weerstation.getLat());

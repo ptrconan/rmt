@@ -13,6 +13,7 @@ import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Stationnaam;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weergegevens;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstations;
+import org.vpk.rmt.serviceproviders.buienradar.client.stub.BuienradarClientStub;
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
 
 public class BuienradarServerImplTest {
@@ -53,4 +54,13 @@ public class BuienradarServerImplTest {
 		assertEquals("Response is not as expected, ", "11.1", String.valueOf(response.getTemperature()));
 	}
 
+	@Test
+	public void test20161108222000() {
+		BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
+		buienradarServer.setBuienradarClient(new BuienradarClientStub("20161108222000"));
+
+		WeatherInformation weatherInformation = buienradarServer.getWeatherInformation("Eindhoven", "false");
+
+		assertEquals("Response is not as expected, ", "3.3", String.valueOf(weatherInformation.getTemperature()));
+	}
 }

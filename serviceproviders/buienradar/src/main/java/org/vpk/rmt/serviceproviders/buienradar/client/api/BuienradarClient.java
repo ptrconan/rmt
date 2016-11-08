@@ -7,13 +7,16 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Buienradarnl;
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
 
 /**
  * This is the endpoint to connect to the Buienradar client API.
  */
 @Path(BuienradarClient.apiRootPath)
 @Api(
-    value = "Buienradar client API",
+    value = "/",
     description = "The Buienradar client API"
 )
 public interface BuienradarClient {

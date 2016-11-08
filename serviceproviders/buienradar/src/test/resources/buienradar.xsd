@@ -1,0 +1,321 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="titel" type="xs:string"/>
+  <xs:element name="link" type="xs:anyURI"/>
+  <xs:element name="url" type="xs:string"/>
+  <xs:element name="width" type="xs:short"/>
+  <xs:element name="height" type="xs:byte"/>
+  <xs:element name="stationcode" type="xs:short"/>
+  <xs:element name="stationnaam">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="regio" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="lat" type="xs:float"/>
+  <xs:element name="lon" type="xs:float"/>
+  <xs:element name="datum" type="xs:string"/>
+  <xs:element name="luchtvochtigheid" type="xs:byte"/>
+  <xs:element name="temperatuurGC" type="xs:float"/>
+  <xs:element name="windsnelheidMS" type="xs:float"/>
+  <xs:element name="windsnelheidBF" type="xs:byte"/>
+  <xs:element name="windrichtingGR" type="xs:float"/>
+  <xs:element name="windrichting" type="xs:string"/>
+  <xs:element name="luchtdruk" type="xs:float"/>
+  <xs:element name="zichtmeters" type="xs:int"/>
+  <xs:element name="windstotenMS" type="xs:float"/>
+  <xs:element name="regenMMPU" type="xs:byte"/>
+  <xs:element name="icoonactueel">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:anyURI">
+          <xs:attribute type="xs:string" name="zin" use="optional"/>
+          <xs:attribute type="xs:string" name="ID" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="temperatuur10cm" type="xs:float"/>
+  <xs:element name="latGraden" type="xs:float"/>
+  <xs:element name="lonGraden" type="xs:float"/>
+  <xs:element name="weerstation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="stationcode"/>
+        <xs:element ref="stationnaam"/>
+        <xs:element ref="lat"/>
+        <xs:element ref="lon"/>
+        <xs:element ref="datum"/>
+        <xs:element ref="luchtvochtigheid"/>
+        <xs:element ref="temperatuurGC"/>
+        <xs:element ref="windsnelheidMS"/>
+        <xs:element ref="windsnelheidBF"/>
+        <xs:element ref="windrichtingGR"/>
+        <xs:element ref="windrichting"/>
+        <xs:element ref="luchtdruk"/>
+        <xs:element ref="zichtmeters"/>
+        <xs:element ref="windstotenMS"/>
+        <xs:element ref="regenMMPU"/>
+        <xs:element ref="icoonactueel"/>
+        <xs:element ref="temperatuur10cm"/>
+        <xs:element ref="url"/>
+        <xs:element ref="latGraden"/>
+        <xs:element ref="lonGraden"/>
+      </xs:sequence>
+      <xs:attribute type="xs:short" name="id" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="waardepercentage" type="xs:byte"/>
+  <xs:element name="urlbackup" type="xs:string"/>
+  <xs:element name="zonopkomst" type="xs:string"/>
+  <xs:element name="zononder" type="xs:string"/>
+  <xs:element name="aantalonweer" type="xs:byte"/>
+  <xs:element name="aantalhagel" type="xs:byte"/>
+  <xs:element name="weerstations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="weerstation" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="buienindex">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="waardepercentage"/>
+        <xs:element ref="datum"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="buienradar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="url"/>
+        <xs:element ref="urlbackup"/>
+        <xs:element ref="icoonactueel"/>
+        <xs:element ref="zonopkomst"/>
+        <xs:element ref="zononder"/>
+        <xs:element ref="aantalonweer"/>
+        <xs:element ref="aantalhagel"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dagweek" type="xs:string"/>
+  <xs:element name="kanszon" type="xs:byte"/>
+  <xs:element name="kansregen" type="xs:byte"/>
+  <xs:element name="minmmregen" type="xs:byte"/>
+  <xs:element name="maxmmregen" type="xs:byte"/>
+  <xs:element name="mintemp" type="xs:byte"/>
+  <xs:element name="mintempmax" type="xs:byte"/>
+  <xs:element name="maxtemp" type="xs:byte"/>
+  <xs:element name="maxtempmax" type="xs:byte"/>
+  <xs:element name="windkracht" type="xs:byte"/>
+  <xs:element name="icoon">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:anyURI">
+          <xs:attribute type="xs:string" name="ID" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sneeuwcms" type="xs:byte"/>
+  <xs:element name="tekst_middellang">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="periode"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tekst_lang">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="periode"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dag-plus1">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="datum"/>
+        <xs:element ref="dagweek"/>
+        <xs:element ref="kanszon"/>
+        <xs:element ref="kansregen"/>
+        <xs:element ref="minmmregen"/>
+        <xs:element ref="maxmmregen"/>
+        <xs:element ref="mintemp"/>
+        <xs:element ref="mintempmax"/>
+        <xs:element ref="maxtemp"/>
+        <xs:element ref="maxtempmax"/>
+        <xs:element ref="windrichting"/>
+        <xs:element ref="windkracht"/>
+        <xs:element ref="icoon"/>
+        <xs:element ref="sneeuwcms"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dag-plus2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="datum"/>
+        <xs:element ref="dagweek"/>
+        <xs:element ref="kanszon"/>
+        <xs:element ref="kansregen"/>
+        <xs:element ref="minmmregen"/>
+        <xs:element ref="maxmmregen"/>
+        <xs:element ref="mintemp"/>
+        <xs:element ref="mintempmax"/>
+        <xs:element ref="maxtemp"/>
+        <xs:element ref="maxtempmax"/>
+        <xs:element ref="windrichting"/>
+        <xs:element ref="windkracht"/>
+        <xs:element ref="icoon"/>
+        <xs:element ref="sneeuwcms"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dag-plus3">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="datum"/>
+        <xs:element ref="dagweek"/>
+        <xs:element ref="kanszon"/>
+        <xs:element ref="kansregen"/>
+        <xs:element ref="minmmregen"/>
+        <xs:element ref="maxmmregen"/>
+        <xs:element ref="mintemp"/>
+        <xs:element ref="mintempmax"/>
+        <xs:element ref="maxtemp"/>
+        <xs:element ref="maxtempmax"/>
+        <xs:element ref="windrichting"/>
+        <xs:element ref="windkracht"/>
+        <xs:element ref="icoon"/>
+        <xs:element ref="sneeuwcms"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dag-plus4">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="datum"/>
+        <xs:element ref="dagweek"/>
+        <xs:element ref="kanszon"/>
+        <xs:element ref="kansregen"/>
+        <xs:element ref="minmmregen"/>
+        <xs:element ref="maxmmregen"/>
+        <xs:element ref="mintemp"/>
+        <xs:element ref="mintempmax"/>
+        <xs:element ref="maxtemp"/>
+        <xs:element ref="maxtempmax"/>
+        <xs:element ref="windrichting"/>
+        <xs:element ref="windkracht"/>
+        <xs:element ref="icoon"/>
+        <xs:element ref="sneeuwcms"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dag-plus5">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="datum"/>
+        <xs:element ref="dagweek"/>
+        <xs:element ref="kanszon"/>
+        <xs:element ref="kansregen"/>
+        <xs:element ref="minmmregen"/>
+        <xs:element ref="maxmmregen"/>
+        <xs:element ref="mintemp"/>
+        <xs:element ref="mintempmax"/>
+        <xs:element ref="maxtemp"/>
+        <xs:element ref="maxtempmax"/>
+        <xs:element ref="windrichting"/>
+        <xs:element ref="windkracht"/>
+        <xs:element ref="icoon"/>
+        <xs:element ref="sneeuwcms"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tijdweerbericht" type="xs:string"/>
+  <xs:element name="samenvatting" type="xs:string"/>
+  <xs:element name="tekst" type="xs:string"/>
+  <xs:element name="formattedtekst" type="xs:string"/>
+  <xs:element name="omschrijving" type="xs:string"/>
+  <xs:element name="language" type="xs:string"/>
+  <xs:element name="copyright" type="xs:string"/>
+  <xs:element name="gebruik" type="xs:string"/>
+  <xs:element name="image">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="titel"/>
+        <xs:element ref="link"/>
+        <xs:element ref="url"/>
+        <xs:element ref="width"/>
+        <xs:element ref="height"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="actueel_weer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="weerstations"/>
+        <xs:element ref="buienindex"/>
+        <xs:element ref="buienradar"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="verwachting_meerdaags">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="url"/>
+        <xs:element ref="urlbackup"/>
+        <xs:element ref="tekst_middellang"/>
+        <xs:element ref="tekst_lang"/>
+        <xs:element ref="dag-plus1"/>
+        <xs:element ref="dag-plus2"/>
+        <xs:element ref="dag-plus3"/>
+        <xs:element ref="dag-plus4"/>
+        <xs:element ref="dag-plus5"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="verwachting_vandaag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="url"/>
+        <xs:element ref="urlbackup"/>
+        <xs:element ref="titel"/>
+        <xs:element ref="tijdweerbericht"/>
+        <xs:element ref="samenvatting"/>
+        <xs:element ref="tekst"/>
+        <xs:element ref="formattedtekst"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="weergegevens">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="titel"/>
+        <xs:element ref="link"/>
+        <xs:element ref="omschrijving"/>
+        <xs:element ref="language"/>
+        <xs:element ref="copyright"/>
+        <xs:element ref="gebruik"/>
+        <xs:element ref="image"/>
+        <xs:element ref="actueel_weer"/>
+        <xs:element ref="verwachting_meerdaags"/>
+        <xs:element ref="verwachting_vandaag"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="buienradarnl">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="weergegevens"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
