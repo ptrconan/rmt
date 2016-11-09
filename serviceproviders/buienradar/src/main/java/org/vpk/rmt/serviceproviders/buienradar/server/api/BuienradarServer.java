@@ -30,21 +30,21 @@ import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformati
 */
 @Path("/buienradar/")
 @Api(
-	value = "/",
-	description = "The Buienradar server API"
+    value = "/",
+    description = "The Buienradar server API"
 )
 public interface BuienradarServer {
 
-	String apiProduces = MediaType.APPLICATION_JSON + "; charset=utf-8\"";
-	String paramDebug = "debug";
+    String apiProduces = MediaType.APPLICATION_JSON + "; charset=utf-8\"";
+    String paramDebug = "debug";
 
-	@GET
-	@Path("/nl/{station}")
-	@Produces(BuienradarServer.apiProduces)
-	@ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
-	@ApiResponses(value = { @ApiResponse(code = 500, message = "Invalid id supplied") })
-	WeatherInformation getWeatherInformation(
-			@ApiParam(value = "The name of the weather station from which to fetch weather information.", required = true) @PathParam("station") String stationName,
-			@HeaderParam(paramDebug) String debug);
+    @GET
+    @Path("/nl/{station}")
+    @Produces(BuienradarServer.apiProduces)
+    @ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
+    @ApiResponses(value = { @ApiResponse(code = 500, message = "Invalid id supplied") })
+    WeatherInformation getWeatherInformation(
+        @ApiParam(value = "The name of the weather station from which to fetch weather information.", required = true) @PathParam("station") String stationName,
+        @HeaderParam(paramDebug) String debug) throws BuienradarServerException, BuienradarClientException;
 
 }

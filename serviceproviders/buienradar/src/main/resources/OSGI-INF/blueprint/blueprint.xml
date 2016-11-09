@@ -31,9 +31,10 @@
         </jaxrs-server:serviceBeans>
         <jaxrs-server:providers>
            	<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
-            <!--
-            <ref component-id="jsonProvider"/>
-            -->
+            <bean class="org.vpk.rmt.serviceproviders.buienradar.server.errorhandling.CatchAllExceptionMapper">
+                <argument ref="errorMessageFactory"/>
+            </bean>
+            <bean class="org.vpk.rmt.serviceproviders.buienradar.server.transactions.TransactionIdFilter"/>
         </jaxrs-server:providers>
         <jaxrs-server:features>
         	<!-- properties used by http://localhost:9000/cxf/rmt/api-docs info element --> 
@@ -93,5 +94,6 @@
     <bean id="objectMapperProvider" class="org.vpk.rmt.serviceproviders.util.ObjectMapperProvider"/>
     <bean id="xmlProvider" class="com.fasterxml.jackson.jaxrs.xml.JacksonXMLProvider" />
     -->
+    <bean id="errorMessageFactory" class="org.vpk.rmt.serviceproviders.buienradar.server.errorhandling.BuienradarErrorMessageFactory" />
 
 </blueprint>

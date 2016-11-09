@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class WeatherInformation {
 
+    private static final long serialVersionUID = 1L;
+
     public WeatherInformation() {
     }
 

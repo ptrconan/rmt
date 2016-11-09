@@ -1,66 +1,50 @@
 package org.vpk.rmt.serviceproviders.buienradar.server.impl;
 
+import org.junit.Test;
+import org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient;
+import org.vpk.rmt.serviceproviders.buienradar.server.api.BuienradarClientException;
+import org.vpk.rmt.serviceproviders.buienradar.client.stub.BuienradarClientStub;
+import org.vpk.rmt.serviceproviders.buienradar.server.api.BuienradarServerException;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
+
+import javax.ws.rs.NotFoundException;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import org.junit.Test;
-import org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.ActueelWeer;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Buienradarnl;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Stationnaam;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weergegevens;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstations;
-import org.vpk.rmt.serviceproviders.buienradar.client.stub.BuienradarClientStub;
-import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
-
 public class BuienradarServerImplTest {
 
-	@Test
-	public void test() {
-		// create and program the buienradarClient mock response on the request
-		BuienradarClient buienradarClient = mock(BuienradarClient.class);
-		Buienradarnl buienradarnl = new Buienradarnl();
-		Weergegevens weergegevens = new Weergegevens();
-		ActueelWeer actueelWeer = new ActueelWeer();
-		Weerstations weerstations = new Weerstations();
-		
-		Weerstation weerstation1 = new Weerstation();
-		Stationnaam stationnaam1 = new Stationnaam();
-		stationnaam1.setRegio("Eindhoven");
-		weerstation1.setStationnaam(stationnaam1);
-		weerstation1.setTemperatuurGC(11.1f);
+    @Test
+    public void test20161108222000() {
+        BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
+        buienradarServer.setBuienradarClient(new BuienradarClientStub("20161108222000"));
 
-		Weerstation weerstation2 = new Weerstation();
-		Stationnaam stationnaam2 = new Stationnaam();
-		stationnaam2.setRegio("Son");
-		weerstation2.setStationnaam(stationnaam2);
-		weerstation2.setTemperatuurGC(22.2f);
-		
-		weerstations.getWeerstation().add(weerstation1);
-		weerstations.getWeerstation().add(weerstation2);
-		actueelWeer.setWeerstations(weerstations);
-		weergegevens.setActueelWeer(actueelWeer);
-		buienradarnl.setWeergegevens(weergegevens);
-		when(buienradarClient.getBuienradarnl()).thenReturn(buienradarnl);
-		
-		BuienradarServerImpl buienradarServerImpl = new BuienradarServerImpl();
-		buienradarServerImpl.setBuienradarClient(buienradarClient);
-		
-		WeatherInformation response = buienradarServerImpl.getWeatherInformation("Eindhoven", "false");
-		
-		assertEquals("Response is not as expected, ", "11.1", String.valueOf(response.getTemperature()));
-	}
+        WeatherInformation weatherInformation = null;
+        try {
+            weatherInformation = buienradarServer.getWeatherInformation("Eindhoven", "false");
+            assertEquals("Response is not as expected, ", "3.3", String.valueOf(weatherInformation.getTemperature()));
+        } catch (BuienradarServerException e) {
+        } catch (BuienradarClientException e) {
+        }
+    }
 
-	@Test
-	public void test20161108222000() {
-		BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
-		buienradarServer.setBuienradarClient(new BuienradarClientStub("20161108222000"));
+    @Test (expected = BuienradarServerException.class)
+    public void testUnknownStation() throws BuienradarServerException, BuienradarClientException {
+        BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
+        buienradarServer.setBuienradarClient(new BuienradarClientStub("20161108222000"));
 
-		WeatherInformation weatherInformation = buienradarServer.getWeatherInformation("Eindhoven", "false");
+        buienradarServer.getWeatherInformation("Timboektoe", "false");
+    }
 
-		assertEquals("Response is not as expected, ", "3.3", String.valueOf(weatherInformation.getTemperature()));
-	}
+    @Test (expected = BuienradarClientException.class)
+    public void testClientThrowsException() throws BuienradarServerException, BuienradarClientException {
+        BuienradarClient buienradarClient = mock(BuienradarClient.class);
+        when(buienradarClient.getBuienradarnl()).thenThrow(new NotFoundException("test"));
+
+        BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
+        buienradarServer.setBuienradarClient(buienradarClient);
+
+        buienradarServer.getWeatherInformation("test", "false");
+    }
 }
