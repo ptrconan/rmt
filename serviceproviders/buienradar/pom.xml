@@ -24,6 +24,13 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.vpk.rmt.common</groupId>
+            <artifactId>datamodel</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <scope>provided</scope>

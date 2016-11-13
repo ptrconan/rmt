@@ -37,7 +37,7 @@ public class BuienradarServerImpl implements BuienradarServer {
 
         WeatherInformation weatherInformation = new WeatherInformation();
         if (optionalWeerStation.isPresent()) {
-/*	TODO: use extractor
+/*  TODO: use extractor
 *         Optional.ofNullable(titleType.getDurationInSeconds())
                 .map(BigInteger::intValue)
                 .ifPresent(descriptiveMetadata::setDuration);

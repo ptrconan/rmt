@@ -21,7 +21,7 @@ import java.io.IOException;
 )
 public interface BuienradarClient {
 
-	String apiRootPath = "/";
+    String apiRootPath = "/";
 
     /**
      * Get the weather information as present in the XML feed from http://xml.buienradar.nl and transform it into a POJO.
