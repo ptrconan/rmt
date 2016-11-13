@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://org.vpk.rmt/common/datamodel/model/ExternalId",
+  "javaType": "org.vpk.rmt.common.datamodel.model.ExternalId",
+  "type": "object",
+  "extends" : {
+     "$ref" : "DatamodelObject.json"
+  },  
+  "properties": {
+    "value": {
+      "required": true,
+      "type": "string"
+    },
+    "provider": {
+      "required": true,
+      "type": "string"
+    }
+  }
+}

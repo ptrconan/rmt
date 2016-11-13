@@ -1,130 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.vpk.rmt</groupId>
-		<artifactId>serviceproviders</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>org.vpk.rmt</groupId>
+        <artifactId>serviceproviders</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
-	<groupId>org.vpk.rmt.serviceproviders</groupId>
-	<artifactId>buienradar</artifactId>
-	<packaging>bundle</packaging>
-	<name>RMT :: Serviceproviders :: Buienradar</name>
-	<description>RMT Buienradar Serviceprovider</description>
+    <groupId>org.vpk.rmt.serviceproviders</groupId>
+    <artifactId>buienradar</artifactId>
+    <packaging>bundle</packaging>
+    <name>RMT :: Serviceproviders :: Buienradar</name>
+    <description>RMT Buienradar Serviceprovider</description>
 
-	<properties>
-		<fabric8:profile>${project.groupId}-buienradar</fabric8:profile>
-		<fabric8:parentProfiles>feature-cxf</fabric8:parentProfiles>
-		<fabric8.features>swagger</fabric8.features>
-	</properties>
-	
-	<dependencies>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-	
-		<dependency>
-			<groupId>com.wordnik</groupId>
-			<artifactId>swagger-jaxrs_2.10</artifactId>
-			<scope>provided</scope>
-			<exclusions>
-				<!-- Exclusion fixes missing dependency. -->
-				<exclusion>
-					<groupId>javax.ws.rs</groupId>
-					<artifactId>jsr311-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+    <properties>
+        <fabric8:profile>${project.groupId}-buienradar</fabric8:profile>
+        <fabric8:parentProfiles>feature-cxf</fabric8:parentProfiles>
+        <fabric8.features>swagger</fabric8.features>
+    </properties>
 
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
-			<scope>provided</scope>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-		<!-- Jackson-based JAX-RS provider that can automatically serialize and deserialize resources for JSON content type (MediaType). -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.jaxrs</groupId>
-			<artifactId>jackson-jaxrs-json-provider</artifactId>
-			<scope>provided</scope>
-		</dependency>
+        <dependency>
+            <groupId>com.wordnik</groupId>
+            <artifactId>swagger-jaxrs_2.10</artifactId>
+            <scope>provided</scope>
+            <exclusions>
+                <!-- Exclusion fixes missing dependency. -->
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>jsr311-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Jackson-based JAX-RS provider that can automatically serialize and deserialize resources for JSON content type (MediaType). -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
 
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-client</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-client</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
-	</dependencies>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.jvnet.jaxb2.maven2</groupId>
-					<artifactId>maven-jaxb2-plugin</artifactId>
-					<!-- version set back from 0.12.3 to 0.12.1 because Eclipse errors on unit tests -->
-					<version>0.12.1</version>
-					<executions>
-						<execution>
-							<goals>
-								<goal>generate</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-		<plugins>
-			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
-				<configuration>
-					<!--
-						generate the xsd for example online
-						site: http://www.freeformatter.com/xsd-generator.html
-						XSD design: Salami Slice
-					-->
-					<generatePackage>org.vpk.rmt.serviceproviders.buienradar.client.datamodel</generatePackage>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<!--
-						<Import-Package />
-						<Import-Service>org.apache.aries.blueprint.NamespaceHandler;
-							osgi.service.blueprint.namespace=http://cxf.apache.org/transports/http/configuration
-						</Import-Service>
-						<Export-Package>
-							org.vpk.rmt.serviceproviders.buienradar
-						</Export-Package>
-						-->
-						<Export-Package>!*</Export-Package>
-					</instructions>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jvnet.jaxb2.maven2</groupId>
+                    <artifactId>maven-jaxb2-plugin</artifactId>
+                    <!-- version set back from 0.12.3 to 0.12.1 because Eclipse errors on unit tests -->
+                    <version>0.12.1</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <configuration>
+                    <!--
+                        generate the xsd for example online
+                        site: http://www.freeformatter.com/xsd-generator.html
+                        XSD design: Salami Slice
+                    -->
+                    <generatePackage>org.vpk.rmt.serviceproviders.buienradar.client.datamodel</generatePackage>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <!--
+                        <Import-Package />
+                        <Import-Service>org.apache.aries.blueprint.NamespaceHandler;
+                            osgi.service.blueprint.namespace=http://cxf.apache.org/transports/http/configuration
+                        </Import-Service>
+                        <Export-Package>
+                            org.vpk.rmt.serviceproviders.buienradar
+                        </Export-Package>
+                        -->
+                        <Export-Package>!*</Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

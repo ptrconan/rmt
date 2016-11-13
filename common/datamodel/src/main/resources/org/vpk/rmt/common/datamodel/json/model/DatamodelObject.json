@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://org.vpk.rmt/common/datamodel/model/CboObject",
+  "javaType" : "org.vpk.rmt.common.datamodel.model.CboObject",
+  "type": "object",
+  "properties": {
+    "version": {
+      "required": true,
+      "type": "string",
+      "default": "1.0"
+    }
+  }
+}

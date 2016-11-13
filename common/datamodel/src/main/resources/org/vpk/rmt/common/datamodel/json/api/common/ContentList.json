@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://org.vpk.rmt/common/datamodel/api/common/ContentList",
+  "javaType": "org.vpk.rmt.common.datamodel.api.common.ContentList",
+  "type": "object",
+  "extends": {
+    "javaType" : "org.vpk.rmt.common.datamodel.api.DatamodelMessage"
+  },
+  "properties": {
+    "payload": {
+      "required": false,
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "../../model/Content.json"
+      }
+    },
+    "contentcount" : {
+      "required" : false,
+      "type" : "integer"
+    },
+    "debug": {
+      "description": "Placeholder to put a datamodel reference for debugging purposes",
+      "required": false,
+      "type": "object",
+      "javaType": "java.lang.Object"
+    }
+  }
+}

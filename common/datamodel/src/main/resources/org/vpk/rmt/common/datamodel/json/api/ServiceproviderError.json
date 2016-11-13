@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://org.vpk.rmt/common/datamodel/api/ServiceproviderError",
+  "javaType": "org.vpk.rmt.common.datamodel.api.ServiceproviderError",
+  "type": "object",
+  "properties": {
+    "timestamp": {
+      "required": false,
+      "type": "string"
+    },
+    "source": {
+      "required": false,
+      "type": "string"
+    },
+    "originalUri": {
+      "required": false,
+      "type": "string"
+    },
+    "internalError": {
+      "required": false,
+      "type": "string"
+    },
+    "message": {
+      "required": false,
+      "type": "string"
+    }
+  }
+}

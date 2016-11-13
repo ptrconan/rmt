@@ -8,14 +8,14 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>serviceproviders</artifactId>
+    <artifactId>common</artifactId>
     <packaging>pom</packaging>
-    <name>RMT :: Serviceproviders :: POM</name>
-    <description>RMT Serviceproviders POM</description>
+    <name>RMT :: Common :: POM</name>
+    <description>RMT Common POM</description>
 
     <modules>
-        <module>buienradar</module>
-        <module>buienradar_feature</module>
+        <module>datamodel</module>
+        <module>datamodel-annotator</module>
     </modules>
 
 </project>

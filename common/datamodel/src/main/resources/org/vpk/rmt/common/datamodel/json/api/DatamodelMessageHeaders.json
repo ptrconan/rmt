@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://org.vpk.rmt/common/datamodel/api/MessageHeaders",
+  "javaType": "org.vpk.rmt.common.datamodel.api.MessageHeaders",
+  "type": "object",
+  "properties": {
+
+    "version": {
+      "type": "string",
+      "required": true
+    },
+
+    "errorCode": {
+      "type": "string"
+    },
+
+    "errorDescription": {
+      "type": "string"
+    },
+
+    "errorSource": {
+      "type": "string"
+    },
+
+    "clientId": {
+      "type": "string"
+    },
+
+    "clientType" : {
+      "type": "string"
+    },
+
+    "transactionId" : {
+      "type": "string"
+    },
+
+    "operationName" : {
+      "type": "string"
+    },
+
+    "creationTimestamp" : {
+      "type" : "string",
+      "required" : true
+    }
+  }
+}

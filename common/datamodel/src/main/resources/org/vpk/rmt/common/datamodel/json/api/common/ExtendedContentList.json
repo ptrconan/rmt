@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://org.vpk.rmt/common/datamodel/api/common/ExtendedContentList",
+  "javaType": "org.vpk.rmt.common.datamodel.api.common.ExtendedContentList",
+  "type": "object",
+  "extends": {
+    "$ref" : "ContentList.json"
+  },
+  "properties": {
+    "listType": {
+      "type": "string",
+      "enum": [
+        "enum1",
+        "enum2",
+        "enum3"
+      ],
+      "javaEnumNames": [
+        "ENUM1",
+        "ENUM2",
+        "ENUM3"
+      ]
+    },
+    "extendedContent": {
+      "required": false,
+      "$ref": "../../model/Content.json"
+    }
+  }
+}

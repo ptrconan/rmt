@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://org.vpk.rmt/common/datamodel/model/Content",
+  "javaType": "org.vpk.rmt.common.datamodel.model.Content",
+  "type": "object",
+  "extends" : {
+     "$ref" : "DatamodelObject.json"
+  },  
+  "properties": {
+    "internalId": {
+      "required": false,
+      "type": "string"
+    },
+    "stations": {
+      "type" : "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "required": false,
+      "items": {
+        "$ref": "Station.json"
+      }
+    }
+  }
+}

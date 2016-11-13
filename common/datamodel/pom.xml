@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.vpk.rmt</groupId>
+        <artifactId>common</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.vpk.rmt.common</groupId>
+    <artifactId>datamodel</artifactId>
+    <packaging>bundle</packaging>
+    <name>RMT :: Common :: Datamodel</name>
+    <description>RMT Common Datamodel</description>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jsonSchema</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <version>3.2.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>${jsonschema2pojo.maven.plugin.version}</version>
+                <configuration>
+                    <sourceDirectory>${basedir}/src/main/resources/org/vpk/rmt/common/datamodel/json</sourceDirectory>
+                    <targetPackage>org.vpk.rmt.common.datamodel</targetPackage>
+                    <annotationStyle>none</annotationStyle>
+                    <!-- We use custom jackson2 annotator in order to change JsonInclude annotation from NON_NULL to NON_EMPTY -->
+                    <customAnnotator>org.jsonschema2pojo.CustomJackson2Annotator</customAnnotator>
+                    <initializeCollections>true</initializeCollections>
+                    <sourceType>jsonschema</sourceType>
+                    <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
+                    <useJodaDates>true</useJodaDates>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.vpk.rmt.common</groupId>
+                        <artifactId>datamodel-annotator</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
