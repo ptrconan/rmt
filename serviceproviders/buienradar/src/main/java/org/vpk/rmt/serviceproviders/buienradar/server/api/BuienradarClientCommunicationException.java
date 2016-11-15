@@ -3,15 +3,15 @@ package org.vpk.rmt.serviceproviders.buienradar.server.api;
 /**
  * Created by Pieter on 9-11-2016.
  */
-public class BuienradarClientException extends Exception {
+public class BuienradarClientCommunicationException extends BuienradarServerException {
 
     private static final long serialVersionUID = 1L;
 
-    public BuienradarClientException() {
+    public BuienradarClientCommunicationException() {
         super();
     }
 
-    public BuienradarClientException(String message) {
+    public BuienradarClientCommunicationException(String message) {
         super(message);
     }
 

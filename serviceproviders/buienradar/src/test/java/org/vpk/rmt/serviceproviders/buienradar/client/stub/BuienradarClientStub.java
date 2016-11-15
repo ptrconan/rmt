@@ -27,22 +27,22 @@ public class BuienradarClientStub implements BuienradarClient {
 
     private static final transient Logger LOG = LoggerFactory.getLogger(BuienradarClientStub.class);
 
-    private String date;
+    private static String filename;
 
-    public BuienradarClientStub(String date) {
-        this.date = date;
+    public BuienradarClientStub(String filename) {
+        this.filename = filename;
     }
 
     @Override
     public Buienradarnl getBuienradarnl() {
-        return get(date);
+        return get();
     }
 
-    private static Buienradarnl get(String date) {
-        return unmarshalBuienradarnlXml("buienradarnl-" + date + ".xml");
+    private static Buienradarnl get() {
+        return unmarshalBuienradarnlXml();
     }
 
-    private static Buienradarnl unmarshalBuienradarnlXml(String filename) {
+    private static Buienradarnl unmarshalBuienradarnlXml() {
         Buienradarnl buienradarnl = new Buienradarnl();
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(Buienradarnl.class);

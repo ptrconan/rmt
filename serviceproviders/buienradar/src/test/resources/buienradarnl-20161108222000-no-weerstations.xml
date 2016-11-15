@@ -1,0 +1,75 @@
+<buienradarnl>
+  <weergegevens>
+    <titel>www.buienradar.nl - actuele weersinformatie</titel>
+    <link>http://www.buienradar.nl</link>
+    <omschrijving>XML feed weersinformatie</omschrijving>
+    <language>nl-nl</language>
+    <copyright>(C)opyright 2005 - 2016 Buienradar B.V. Alle rechten voorbehouden</copyright>
+    <gebruik>Deze XML feed mag vrij worden gebruikt onder voorwaarde van bronvermelding BuienRadar.NL inclusief een hyperlink naar http://www.buienradar.nl. Aan de feed kunnen door gebruikers of andere personen geen rechten worden ontleend.</gebruik>
+    <image>
+      <titel>Buienradar.nl</titel>
+      <link>http://www.buienradar.nl/</link>
+      <url>http://www.buienradar.nl/resources/images/logor.svg</url>
+      <width>950</width>
+      <height>78</height>
+    </image>
+    <actueel_weer>
+      <buienindex>
+        <waardepercentage>0</waardepercentage>
+        <datum>11/08/2016 22:28:04</datum>
+      </buienindex>
+      <buienradar>
+        <url><![CDATA[ <iframe src="http://www.buienradar.nl/xmlradar.aspx" width="400" height="70" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></IFRAME>]]></url>
+        <urlbackup><![CDATA[ <iframe src="http://www3.buienradar.nl/xmlradar.aspx" width="400" height="70" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></IFRAME>]]></urlbackup>
+        <icoonactueel zin="bewolkt" ID="pp">http://xml.buienradar.nl/icons/pp.gif</icoonactueel>
+        <zonopkomst>11/08/2016 07:48:29</zonopkomst>
+        <zononder>11/08/2016 16:58:22</zononder>
+        <aantalonweer>0</aantalonweer>
+        <aantalhagel>0</aantalhagel>
+      </buienradar>
+    </actueel_weer>
+    <verwachting_meerdaags>
+      <url>http://www.buienradar.nl/nederland/verwachtingen/5-daagse-verwachting</url>
+      <urlbackup>http://www.buienradar.nl/nederland/verwachtingen/5-daagse-verwachting</urlbackup>
+      <tekst_middellang periode="woensdag 09 november 2016 tot zondag 13 november 2016">
+                    Wisselvallig. Maxima onder normaal. In de nachten en ochtenden kans op lichte vorst.
+                    </tekst_middellang>
+      <tekst_lang periode="maandag 14 november 2016 tot donderdag 17 november 2016">
+                    Aanhoudend wisselvallig en met name in de nachten hogere temperaturen.
+                    </tekst_lang>
+      <dag-plus1><datum>woensdag 09 november 2016</datum><dagweek>wo</dagweek><kanszon>10</kanszon><kansregen>40</kansregen><minmmregen>0</minmmregen><maxmmregen>4</maxmmregen><mintemp>0</mintemp>
+					<mintempmax>0</mintempmax><maxtemp>4</maxtemp><maxtempmax>4</maxtempmax><windrichting>ZO</windrichting><windkracht>3</windkracht><icoon ID="w">http://xml.buienradar.nl/icons/w.gif</icoon>
+					<sneeuwcms>0</sneeuwcms></dag-plus1>
+      <dag-plus2><datum>donderdag 10 november 2016</datum><dagweek>do</dagweek><kanszon>10</kanszon><kansregen>80</kansregen><minmmregen>4</minmmregen><maxmmregen>4</maxmmregen>
+					<mintemp>2</mintemp><mintempmax>2</mintempmax><maxtemp>6</maxtemp><maxtempmax>6</maxtempmax><windrichting>ZW</windrichting><windkracht>2</windkracht><icoon ID="q">http://xml.buienradar.nl/icons/q.gif</icoon>
+					<sneeuwcms>0</sneeuwcms></dag-plus2>
+      <dag-plus3><datum>vrijdag 11 november 2016</datum><dagweek>vr</dagweek><kanszon>50</kanszon><kansregen>20</kansregen><minmmregen>0</minmmregen><maxmmregen>0</maxmmregen>
+					<mintemp>-2</mintemp><mintempmax>2</mintempmax><maxtemp>5</maxtemp><maxtempmax>6</maxtempmax><windrichting>NO</windrichting><windkracht>2</windkracht><icoon ID="b">http://xml.buienradar.nl/icons/b.gif</icoon>
+					<sneeuwcms>0</sneeuwcms></dag-plus3>
+      <dag-plus4><datum>zaterdag 12 november 2016</datum><dagweek>za</dagweek><kanszon>30</kanszon><kansregen>40</kansregen><minmmregen>0</minmmregen><maxmmregen>2</maxmmregen>
+					<mintemp>-2</mintemp><mintempmax>0</mintempmax><maxtemp>4</maxtemp><maxtempmax>7</maxtempmax><windrichting>ZO</windrichting><windkracht>3</windkracht><icoon ID="w">http://xml.buienradar.nl/icons/w.gif</icoon>
+					<sneeuwcms>0</sneeuwcms></dag-plus4>
+      <dag-plus5><datum>zondag 13 november 2016</datum><dagweek>zo</dagweek><kanszon>30</kanszon><kansregen>40</kansregen><minmmregen>0</minmmregen><maxmmregen>2</maxmmregen>
+					<mintemp>0</mintemp><mintempmax>4</mintempmax><maxtemp>4</maxtemp><maxtempmax>10</maxtempmax><windrichting>O</windrichting><windkracht>3</windkracht><icoon ID="w">http://xml.buienradar.nl/icons/w.gif</icoon>
+					<sneeuwcms>0</sneeuwcms></dag-plus5>
+    </verwachting_meerdaags>
+    <verwachting_vandaag><url>http://www.buienradar.nl/nederland/weerbericht</url><urlbackup>http://www.buienradar.nl/nederland/weerbericht</urlbackup>
+					<titel>Lokaal een winterse bui, morgen in het zuiden regen</titel><tijdweerbericht>Opgesteld op dinsdag 8 nov 2016 om 22:12 uur</tijdweerbericht>
+					<samenvatting>Lokaal een winterse bui, vannacht landinwaarts mogelijk mist. Morgen bewolkt met in het zuiden regen, in het noorden droog.</samenvatting>
+					<tekst>Een gebied met buiige regen en natte sneeuw trekt vanavond over het noorden en oosten, langs de kust valt lokaal een enkele winterse bui. 
+					Elders is het half tot zwaar bewolkt en overwegend droog. De wind komt uit richtingen tussen zuidwest en zuidoost en is zwak tot matig.
+					Komende nacht zijn er wolkenvelden en vooral in het noordoosten en oosten is er kans op (natte) sneeuw. Er is een kleine kans dat dit aanleiding geeft tot gladheid. 
+					Op plaatsen met langdurige opklaringen ontstaat er mogelijk mist. In de loop van de nacht neemt in het zuidwesten de bewolking toe, maar blijft het nog droog. 
+					De minimumtemperatuur loopt uiteen van -2C landinwaarts tot +2C in het  zuidwesten van het land. Zeer lokaal zou het glad kunnen worden, vooral op bruggen en viaducten. 
+					De wind is zuid tot zuidoost en is matig, langs de kust en op het IJsselmeer vrij krachtig.Morgen neemt de bewolking van het zuidwesten uit verder toe en gaat het in het zuiden regenen. 
+					In de Limburgse heuvels is later natte sneeuw niet uitgesloten. In het noorden blijft het grotendeels droog en kan in de ochtend zelfs de zon nog even te zien zijn. 
+					De maximumtemperatuur blijft steken rond 4C. Er staat een matige, langs de kust en op het IJsselmeer vrij krachtige zuidoostenwind. (Bron: KNMI)</tekst>
+					<formattedtekst>Een gebied met buiige regen en natte sneeuw trekt vanavond over het noorden en oosten, langs de kust valt lokaal een enkele winterse bui. Elders is het half tot zwaar bewolkt en overwegend droog. De wind komt uit richtingen tussen zuidwest en zuidoost en is zwak tot matig.
+
+Komende nacht zijn er wolkenvelden en vooral in het noordoosten en oosten is er kans op (natte) sneeuw. Er is een kleine kans dat dit aanleiding geeft tot gladheid. Op plaatsen met langdurige opklaringen ontstaat er mogelijk mist.
+ In de loop van de nacht neemt in het zuidwesten de bewolking toe, maar blijft het nog droog. De minimumtemperatuur loopt uiteen van -2C landinwaarts tot +2C in het  zuidwesten van het land. 
+ Zeer lokaal zou het glad kunnen worden, vooral op bruggen en viaducten. De wind is zuid tot zuidoost en is matig, langs de kust en op het IJsselmeer vrij krachtig.
+
+Morgen neemt de bewolking van het zuidwesten uit verder toe en gaat het in het zuiden regenen. In de Limburgse heuvels is later natte sneeuw niet uitgesloten. In het noorden blijft het grotendeels droog en kan in de ochtend zelfs de zon nog even te zien zijn. De maximumtemperatuur blijft steken rond 4C. Er staat een matige, langs de kust en op het IJsselmeer vrij krachtige zuidoostenwind. (Bron: KNMI)</formattedtekst></verwachting_vandaag>
+  </weergegevens>
+</buienradarnl>

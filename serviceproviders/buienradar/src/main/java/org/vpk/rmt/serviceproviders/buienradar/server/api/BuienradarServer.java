@@ -1,10 +1,6 @@
 package org.vpk.rmt.serviceproviders.buienradar.server.api;
 
 import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -13,6 +9,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.ActueelWeer;
+import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weergegevens;
+import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
+import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstations;
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
 
 /**
@@ -41,10 +41,32 @@ public interface BuienradarServer {
     @GET
     @Path("/nl/{station}")
     @Produces(BuienradarServer.apiProduces)
-    @ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
-    @ApiResponses(value = { @ApiResponse(code = 500, message = "Invalid id supplied") })
+//    @ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
+//    @ApiResponses(value = { @ApiResponse(code = 500, message = "Invalid id supplied") })
     WeatherInformation getWeatherInformation(
-        @ApiParam(value = "The name of the weather station from which to fetch weather information.", required = true) @PathParam("station") String stationName,
-        @HeaderParam(paramDebug) String debug) throws BuienradarServerException, BuienradarClientException;
+//        @ApiParam(value = "The name of the weather station from which to fetch weather information.", required = true) @PathParam("station") String stationName,
+        @PathParam("station") String stationName,
+        @HeaderParam(paramDebug) String debug) throws BuienradarServerException;
 
+    @GET
+    @Path("/nl/weergegevens")
+    @Produces(BuienradarServer.apiProduces)
+    Weergegevens getWeerGegevens(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+
+    @GET
+    @Path("/nl/weergegevens/actueel_weer")
+    @Produces(BuienradarServer.apiProduces)
+    ActueelWeer getActueelWeer(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+
+    @GET
+    @Path("/nl/weergegevens/actueel_weer/weerstations")
+    @Produces(BuienradarServer.apiProduces)
+    Weerstations getWeerStations(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+
+    @GET
+    @Path("/nl/weergegevens/actueel_weer/weerstations/weerstation/{id}")
+    @Produces(BuienradarServer.apiProduces)
+    Weerstation getWeerStation(
+            @PathParam("id") String id,
+            @HeaderParam(paramDebug) String debug) throws BuienradarServerException;
 }
