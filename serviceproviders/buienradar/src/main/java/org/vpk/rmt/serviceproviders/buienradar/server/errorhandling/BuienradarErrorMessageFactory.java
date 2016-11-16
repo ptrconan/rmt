@@ -1,5 +1,6 @@
 package org.vpk.rmt.serviceproviders.buienradar.server.errorhandling;
 
+//import org.joda.time.DateTime;
 import org.joda.time.DateTime;
 import org.vpk.rmt.common.datamodel.api.MessageHeaders;
 
@@ -16,7 +17,7 @@ public class BuienradarErrorMessageFactory implements ErrorMessageFactory {
     @Override
     public MessageHeaders create(String errorDescription, String transactionId) {
         MessageHeaders messageHeaders = new MessageHeaders();
-        messageHeaders.setCreationTimestamp(DateTime.now().toString());
+//        messageHeaders.setCreationTimestamp(DateTime.now().toString());
         messageHeaders.setErrorCode(ERROR_CODE);
         messageHeaders.setErrorDescription(errorDescription);
         messageHeaders.setErrorSource(ERROR_SOURCE);

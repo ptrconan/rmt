@@ -20,6 +20,10 @@
         <fabric8:profile>${project.groupId}-buienradar</fabric8:profile>
         <fabric8:parentProfiles>feature-cxf</fabric8:parentProfiles>
         <fabric8.features>swagger</fabric8.features>
+        <fabric8.bundles>
+            mvn:joda-time/joda-time/${joda.time.version}
+            mvn:org.vpk.rmt.common/datamodel/${project.version}
+        </fabric8.bundles>
     </properties>
 
     <dependencies>
@@ -33,6 +37,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
             <scope>provided</scope>
         </dependency>
 

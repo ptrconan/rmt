@@ -1,4 +1,4 @@
-package org.vpk.rmt.serviceproviders.buienradar.server.api;
+package org.vpk.rmt.serviceproviders.buienradar.server.exceptions;
 
 /**
  * Created by Pieter on 9-11-2016.

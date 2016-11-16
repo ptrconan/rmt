@@ -2,18 +2,12 @@ package org.vpk.rmt.serviceproviders.buienradar.server.api;
 
 import com.wordnik.swagger.annotations.Api;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.ActueelWeer;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weergegevens;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstations;
+import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.*;
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
+import org.vpk.rmt.serviceproviders.buienradar.server.exceptions.BuienradarServerException;
 
 /**
  * This is the endpoint to connect to the Buienradar server API.
@@ -38,6 +32,16 @@ public interface BuienradarServer {
     String apiProduces = MediaType.APPLICATION_JSON + "; charset=utf-8\"";
     String paramDebug = "debug";
 
+    String PATH_GET_WEERGEGEVENS          = "/nl/weergegevens";
+    String PATH_GET_VERWACHTING_MEERDAAGS = "/nl/weergegevens/verwachtingMeerdaags";
+    String PATH_GET_VERWACHTING_VANDAAG   = "/nl/weergegevens/verwachtingVandaag";
+    String PATH_GET_ACTUEEL_WEER          = "/nl/weergegevens/actueel_weer";
+    String PATH_GET_BUIENINDEX            = "/nl/weergegevens/actueel_weer/buienindex";
+    String PATH_GET_BUIENRADAR            = "/nl/weergegevens/actueel_weer/buienradar";
+    String PATH_GET_WEERSTATIONS          = "/nl/weergegevens/actueel_weer/weerstations";
+    String PATH_GET_WEERSTATION           = "/nl/weergegevens/actueel_weer/weerstations/weerstation";
+
+
     @GET
     @Path("/nl/{station}")
     @Produces(BuienradarServer.apiProduces)
@@ -49,24 +53,52 @@ public interface BuienradarServer {
         @HeaderParam(paramDebug) String debug) throws BuienradarServerException;
 
     @GET
-    @Path("/nl/weergegevens")
+    @Path(PATH_GET_WEERGEGEVENS)
     @Produces(BuienradarServer.apiProduces)
     Weergegevens getWeerGegevens(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
 
     @GET
-    @Path("/nl/weergegevens/actueel_weer")
+    @Path(PATH_GET_VERWACHTING_MEERDAAGS)
+    @Produces(BuienradarServer.apiProduces)
+    VerwachtingMeerdaags getVerwachtingMeerdaags(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+
+    @GET
+    @Path(PATH_GET_VERWACHTING_VANDAAG)
+    @Produces(BuienradarServer.apiProduces)
+    VerwachtingVandaag getVerwachtingVandaag(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+
+    @GET
+    @Path(PATH_GET_ACTUEEL_WEER)
     @Produces(BuienradarServer.apiProduces)
     ActueelWeer getActueelWeer(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
 
     @GET
-    @Path("/nl/weergegevens/actueel_weer/weerstations")
+    @Path(PATH_GET_BUIENINDEX)
+    @Produces(BuienradarServer.apiProduces)
+    Buienindex getBuienIndex(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+
+    @GET
+    @Path(PATH_GET_BUIENRADAR)
+    @Produces(BuienradarServer.apiProduces)
+    Buienradar getBuienRadar(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+
+    @GET
+    @Path(PATH_GET_WEERSTATIONS)
     @Produces(BuienradarServer.apiProduces)
     Weerstations getWeerStations(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
 
     @GET
-    @Path("/nl/weergegevens/actueel_weer/weerstations/weerstation/{id}")
+    @Path(PATH_GET_WEERSTATION + "/{id}")
     @Produces(BuienradarServer.apiProduces)
-    Weerstation getWeerStation(
+    Weerstation getWeerStationPathParamId(
             @PathParam("id") String id,
+            @HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+
+    @GET
+    @Path(PATH_GET_WEERSTATION)
+    @Produces(BuienradarServer.apiProduces)
+    Weerstation getWeerStationQueryParam(
+            @QueryParam("id") String id1,
+            @QueryParam("stationcode") String id2,
             @HeaderParam(paramDebug) String debug) throws BuienradarServerException;
 }

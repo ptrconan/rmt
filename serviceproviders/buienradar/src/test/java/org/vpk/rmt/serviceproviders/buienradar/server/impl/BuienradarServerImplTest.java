@@ -2,9 +2,9 @@ package org.vpk.rmt.serviceproviders.buienradar.server.impl;
 
 import org.junit.Test;
 import org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient;
-import org.vpk.rmt.serviceproviders.buienradar.server.api.*;
 import org.vpk.rmt.serviceproviders.buienradar.client.stub.BuienradarClientStub;
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
+import org.vpk.rmt.serviceproviders.buienradar.server.exceptions.*;
 
 import javax.ws.rs.NotFoundException;
 
@@ -56,17 +56,17 @@ public class BuienradarServerImplTest {
     public void testNoWeerGegevens() throws BuienradarServerException {
         BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
         buienradarServer.setBuienradarClient(new BuienradarClientStub("buienradarnl-20161108222000-no-weergegevens.xml"));
-        buienradarServer.getWeerStation("dummyId", "false");
+        buienradarServer.getWeerGegevens("false");
     }
 
-    @Test (expected = BuienradarWeerstationsNotFoundException.class)
+    @Test (expected = BuienradarWeerStationsNotFoundException.class)
     public void testNoWeerStations() throws BuienradarServerException {
         BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
         buienradarServer.setBuienradarClient(new BuienradarClientStub("buienradarnl-20161108222000-no-weerstations.xml"));
-        buienradarServer.getWeerStation("dummyId", "false");
+        buienradarServer.getWeerStations("false");
     }
 
-    @Test (expected = BuienradarWeerstationNotFoundException.class)
+    @Test (expected = BuienradarWeerStationNotFoundException.class)
     public void testNoWeerStation() throws BuienradarServerException {
         BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
         buienradarServer.setBuienradarClient(new BuienradarClientStub("buienradarnl-20161108222000-no-weerstation.xml"));
