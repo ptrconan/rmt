@@ -6,22 +6,14 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.*;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherDataActualForRegion;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherDataExpectedNext;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherDataExpectedToday;
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
 import org.vpk.rmt.serviceproviders.buienradar.server.exceptions.BuienradarServerException;
 
-/**
- * This is the endpoint to connect to the Buienradar server API.
- */
+import java.util.List;
 
-/**
-* This Java class with be hosted in the URI path defined by the @Path annotation. @Path annotations on the methods
-* of this class always refer to a path relative to the path defined at the class level.
-* <p/>
-* For example, with 'http://localhost:8181/cxf' as the default CXF servlet path and '/rmt' as the JAX-RS server path,
-* this class will be hosted in 'http://localhost:8181/cxf/rmt/buienradar'.
-* A @Path("/{station}") annotation on
-* one of the methods would result in 'http://localhost:8181/cxf/rmt/buienradar/country'.
-*/
 @Path("/buienradar/")
 @Api(
     value = "/",
@@ -41,64 +33,76 @@ public interface BuienradarServer {
     String PATH_GET_WEERSTATIONS          = "/nl/weergegevens/actueel_weer/weerstations";
     String PATH_GET_WEERSTATION           = "/nl/weergegevens/actueel_weer/weerstations/weerstation";
 
+    String PATH_GET_WEATHER_DATA_ACTUAL_FOR_REGION = "/nl/weatherdata/actual/region/{regionsCsv}";
+    String PATH_GET_WEATHER_DATA_EXPECTED_TODAY    = "/nl/weatherdata/expected/today";
+    String PATH_GET_WEATHER_DATA_EXPECTED_NEXT_N   = "/nl/weatherdata/expected/next/{nofDays}";
 
     @GET
     @Path("/nl/{station}")
     @Produces(BuienradarServer.apiProduces)
-//    @ApiOperation(value = "Get weather information", httpMethod = "GET", notes = "This will return the weather information for a country.", response = String.class)
-//    @ApiResponses(value = { @ApiResponse(code = 500, message = "Invalid id supplied") })
     WeatherInformation getWeatherInformation(
-//        @ApiParam(value = "The name of the weather station from which to fetch weather information.", required = true) @PathParam("station") String stationName,
         @PathParam("station") String stationName,
         @HeaderParam(paramDebug) String debug) throws BuienradarServerException;
 
     @GET
+    @Path(PATH_GET_WEATHER_DATA_ACTUAL_FOR_REGION)
+    @Produces(BuienradarServer.apiProduces)
+    List<WeatherDataActualForRegion> getWeatherDataActualForRegion(@PathParam("regions") String regions) throws BuienradarServerException;
+
+    @GET
+    @Path(PATH_GET_WEATHER_DATA_EXPECTED_TODAY)
+    @Produces(BuienradarServer.apiProduces)
+    WeatherDataExpectedToday getWeatherDataExpectedToday() throws BuienradarServerException;
+
+    @GET
+    @Path(PATH_GET_WEATHER_DATA_EXPECTED_NEXT_N)
+    @Produces(BuienradarServer.apiProduces)
+    List<WeatherDataExpectedNext> getWeatherDataExpectedNext(@PathParam("nofDays") String nofDays) throws BuienradarServerException;
+
+    @GET
     @Path(PATH_GET_WEERGEGEVENS)
     @Produces(BuienradarServer.apiProduces)
-    Weergegevens getWeerGegevens(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+    Weergegevens getWeerGegevens() throws BuienradarServerException;
 
     @GET
     @Path(PATH_GET_VERWACHTING_MEERDAAGS)
     @Produces(BuienradarServer.apiProduces)
-    VerwachtingMeerdaags getVerwachtingMeerdaags(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+    VerwachtingMeerdaags getVerwachtingMeerdaags() throws BuienradarServerException;
 
     @GET
     @Path(PATH_GET_VERWACHTING_VANDAAG)
     @Produces(BuienradarServer.apiProduces)
-    VerwachtingVandaag getVerwachtingVandaag(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+    VerwachtingVandaag getVerwachtingVandaag() throws BuienradarServerException;
 
     @GET
     @Path(PATH_GET_ACTUEEL_WEER)
     @Produces(BuienradarServer.apiProduces)
-    ActueelWeer getActueelWeer(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+    ActueelWeer getActueelWeer() throws BuienradarServerException;
 
     @GET
     @Path(PATH_GET_BUIENINDEX)
     @Produces(BuienradarServer.apiProduces)
-    Buienindex getBuienIndex(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+    Buienindex getBuienIndex() throws BuienradarServerException;
 
     @GET
     @Path(PATH_GET_BUIENRADAR)
     @Produces(BuienradarServer.apiProduces)
-    Buienradar getBuienRadar(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+    Buienradar getBuienRadar() throws BuienradarServerException;
 
     @GET
     @Path(PATH_GET_WEERSTATIONS)
     @Produces(BuienradarServer.apiProduces)
-    Weerstations getWeerStations(@HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+    Weerstations getWeerStations() throws BuienradarServerException;
 
     @GET
     @Path(PATH_GET_WEERSTATION + "/{id}")
     @Produces(BuienradarServer.apiProduces)
-    Weerstation getWeerStationPathParamId(
-            @PathParam("id") String id,
-            @HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+    Weerstation getWeerStationPathParamId(@PathParam("id") String id) throws BuienradarServerException;
 
     @GET
     @Path(PATH_GET_WEERSTATION)
     @Produces(BuienradarServer.apiProduces)
     Weerstation getWeerStationQueryParam(
             @QueryParam("id") String id1,
-            @QueryParam("stationcode") String id2,
-            @HeaderParam(paramDebug) String debug) throws BuienradarServerException;
+            @QueryParam("stationcode") String id2) throws BuienradarServerException;
 }

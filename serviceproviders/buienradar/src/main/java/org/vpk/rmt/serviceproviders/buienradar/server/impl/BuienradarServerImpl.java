@@ -1,14 +1,22 @@
 package org.vpk.rmt.serviceproviders.buienradar.server.impl;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.joda.time.DateTime;
 import org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.*;
 import org.vpk.rmt.serviceproviders.buienradar.server.api.BuienradarServer;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherDataActualForRegion;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherDataExpectedNext;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherDataExpectedToday;
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
 import org.vpk.rmt.serviceproviders.buienradar.server.exceptions.*;
+
+import javax.ws.rs.PathParam;
 
 import static org.joda.time.DateTime.now;
 
@@ -67,62 +75,95 @@ public class BuienradarServerImpl implements BuienradarServer {
         }
     }
 
+    Function<Weerstation, WeatherDataActualForRegion> transformClientModelToServerModel = new Function<Weerstation, WeatherDataActualForRegion>() {
+        @Override
+        public WeatherDataActualForRegion apply(Weerstation weerstation) {
+            WeatherDataActualForRegion weatherDataActualForRegion = new WeatherDataActualForRegion();
+            weatherDataActualForRegion.setRegion(weerstation.getStationnaam().getRegio());
+            weatherDataActualForRegion.setLatitude(weerstation.getLatGraden());
+            weatherDataActualForRegion.setLongitude(weerstation.getLonGraden());
+            weatherDataActualForRegion.setHumidity(weerstation.getLuchtvochtigheid());
+            weatherDataActualForRegion.setTemperature(weerstation.getTemperatuurGC());
+            return weatherDataActualForRegion;
+        }
+    };
+
     @Override
-    public Weergegevens getWeerGegevens(String debug) throws BuienradarServerException {
+    public List<WeatherDataActualForRegion> getWeatherDataActualForRegion(@PathParam("regions") String regions) throws BuienradarServerException {
+        List<String> regionList = Arrays.asList(regions.split(","));
+        List<Weerstation> weerstationList = getWeerStationList(regionList);
+        List<WeatherDataActualForRegion> weatherDataActualForRegionList = weerstationList.stream()
+                .map(transformClientModelToServerModel)
+                .collect(Collectors.toList());
+        return weatherDataActualForRegionList;
+    }
+
+    @Override
+    public WeatherDataExpectedToday getWeatherDataExpectedToday() throws BuienradarServerException {
+        return null;
+    }
+
+    @Override
+    public List<WeatherDataExpectedNext> getWeatherDataExpectedNext(@PathParam("nofDays") String nofDays) throws BuienradarServerException {
+        return null;
+    }
+
+    @Override
+    public Weergegevens getWeerGegevens() throws BuienradarServerException {
         return Optional.of(getBuienradarnl())
                 .map(Buienradarnl::getWeergegevens)
                 .orElseThrow(() -> new BuienradarWeerGegevensNotFoundException());
     }
 
     @Override
-    public VerwachtingMeerdaags getVerwachtingMeerdaags(String debug) throws BuienradarServerException {
-        return Optional.of(getWeerGegevens(debug))
+    public VerwachtingMeerdaags getVerwachtingMeerdaags() throws BuienradarServerException {
+        return Optional.of(getWeerGegevens())
                 .map(Weergegevens::getVerwachtingMeerdaags)
                 .orElseThrow(() -> new BuienradarVerwachtingMeerdaagsNotFoundException());
     }
 
     @Override
-    public VerwachtingVandaag getVerwachtingVandaag(String debug) throws BuienradarServerException {
-        return Optional.of(getWeerGegevens(debug))
+    public VerwachtingVandaag getVerwachtingVandaag() throws BuienradarServerException {
+        return Optional.of(getWeerGegevens())
                 .map(Weergegevens::getVerwachtingVandaag)
                 .orElseThrow(() -> new BuienradarVerwachtingVandaagNotFoundException());
     }
 
     @Override
-    public ActueelWeer getActueelWeer(String debug) throws BuienradarServerException {
-        return Optional.of(getWeerGegevens(debug))
+    public ActueelWeer getActueelWeer() throws BuienradarServerException {
+        return Optional.of(getWeerGegevens())
                 .map(Weergegevens::getActueelWeer)
                 .orElseThrow(() -> new BuienradarActueelWeerNotFoundException());
     }
 
     @Override
-    public Buienindex getBuienIndex(String debug) throws BuienradarServerException {
-        return Optional.of(getActueelWeer(debug))
+    public Buienindex getBuienIndex() throws BuienradarServerException {
+        return Optional.of(getActueelWeer())
                 .map(ActueelWeer::getBuienindex)
                 .orElseThrow(() -> new BuienradarBuienIndexNotFoundException());
     }
 
     @Override
-    public Buienradar getBuienRadar(String debug) throws BuienradarServerException {
-        return Optional.of(getActueelWeer(debug))
+    public Buienradar getBuienRadar() throws BuienradarServerException {
+        return Optional.of(getActueelWeer())
                 .map(ActueelWeer::getBuienradar)
                 .orElseThrow(() -> new BuienradarBuienRadarNotFoundException());
     }
 
     @Override
-    public Weerstations getWeerStations(String debug) throws BuienradarServerException {
-        return Optional.of(getActueelWeer(debug))
+    public Weerstations getWeerStations() throws BuienradarServerException {
+        return Optional.of(getActueelWeer())
                 .map(ActueelWeer::getWeerstations)
                 .orElseThrow(() -> new BuienradarWeerStationsNotFoundException());
     }
 
     @Override
-    public Weerstation getWeerStationPathParamId(String id, String debug) throws BuienradarServerException {
-        return getWeerStation(id, debug);
+    public Weerstation getWeerStationPathParamId(String id) throws BuienradarServerException {
+        return getWeerStation(id);
     }
 
     @Override
-    public Weerstation getWeerStationQueryParam(String id1, String id2, String debug) throws BuienradarServerException {
+    public Weerstation getWeerStationQueryParam(String id1, String id2) throws BuienradarServerException {
         String id = "0";
         if (id1 != null) {
             id = id1;
@@ -130,18 +171,27 @@ public class BuienradarServerImpl implements BuienradarServer {
         if (id2 != null) {
             id = id2;
         }
-        return getWeerStation(id, debug);
+        return getWeerStation(id);
     }
 
-    // the next method is kept public just for the sake of unit tests
-    public Weerstation getWeerStation(String id, String debug) throws BuienradarServerException {
-        return Optional.of(getWeerStations(debug))
+    // public for unit testing
+    public Weerstation getWeerStation(String id) throws BuienradarServerException {
+        return Optional.of(getWeerStations())
                 .map(Weerstations::getWeerstation)
                 .get()
                 .stream()
                 .filter(weerstation -> weerstation.getId().equals(Short.valueOf(id)))
                 .findFirst()
                 .orElseThrow(() -> new BuienradarWeerStationNotFoundException());
+    }
+
+    private List<Weerstation> getWeerStationList(List<String> regionList) throws BuienradarServerException {
+        return Optional.of(getWeerStations())
+                .map(Weerstations::getWeerstation)
+                .get()
+                .stream()
+                .filter(weerstation -> (regionList.contains(weerstation.getStationnaam().getRegio())))
+                .collect(Collectors.toList());
     }
 
     private Buienradarnl getBuienradarnl() throws BuienradarClientCommunicationException {

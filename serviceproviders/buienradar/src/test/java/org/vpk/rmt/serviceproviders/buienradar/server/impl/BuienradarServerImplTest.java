@@ -2,11 +2,16 @@ package org.vpk.rmt.serviceproviders.buienradar.server.impl;
 
 import org.junit.Test;
 import org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient;
+import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
 import org.vpk.rmt.serviceproviders.buienradar.client.stub.BuienradarClientStub;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherDataActualForRegion;
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
 import org.vpk.rmt.serviceproviders.buienradar.server.exceptions.*;
 
 import javax.ws.rs.NotFoundException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -49,34 +54,44 @@ public class BuienradarServerImplTest {
     public void testNoActueelWeer() throws BuienradarServerException {
         BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
         buienradarServer.setBuienradarClient(new BuienradarClientStub("buienradarnl-20161108222000-no-actueel_weer.xml"));
-        buienradarServer.getWeerStation("dummyId", "false");
+        buienradarServer.getWeerStation("dummyId");
     }
 
     @Test (expected = BuienradarWeerGegevensNotFoundException.class)
     public void testNoWeerGegevens() throws BuienradarServerException {
         BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
         buienradarServer.setBuienradarClient(new BuienradarClientStub("buienradarnl-20161108222000-no-weergegevens.xml"));
-        buienradarServer.getWeerGegevens("false");
+        buienradarServer.getWeerGegevens();
     }
 
     @Test (expected = BuienradarWeerStationsNotFoundException.class)
     public void testNoWeerStations() throws BuienradarServerException {
         BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
         buienradarServer.setBuienradarClient(new BuienradarClientStub("buienradarnl-20161108222000-no-weerstations.xml"));
-        buienradarServer.getWeerStations("false");
+        buienradarServer.getWeerStations();
     }
 
     @Test (expected = BuienradarWeerStationNotFoundException.class)
     public void testNoWeerStation() throws BuienradarServerException {
         BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
         buienradarServer.setBuienradarClient(new BuienradarClientStub("buienradarnl-20161108222000-no-weerstation.xml"));
-        buienradarServer.getWeerStation("dummyId", "false");
+        buienradarServer.getWeerStation("dummyId");
     }
 
     @Test
     public void testGetWeerStation() throws BuienradarServerException {
         BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
         buienradarServer.setBuienradarClient(new BuienradarClientStub("buienradarnl-20161108222000.xml"));
-        buienradarServer.getWeerStation("6275", "false");
+        buienradarServer.getWeerStation("6275");
+        // TODO: assert WHAT?
+    }
+
+    @Test
+    public void testGetWeatherDataActualForRegion() throws BuienradarServerException {
+        BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
+        buienradarServer.setBuienradarClient(new BuienradarClientStub("buienradarnl-20161108222000.xml"));
+        List<WeatherDataActualForRegion> weatherDataActualForRegionList =
+                buienradarServer.getWeatherDataActualForRegion("Eindhoven,Venloo");
+        assertEquals("number of weerstations is incorrect", 2, weatherDataActualForRegionList.size());
     }
 }
