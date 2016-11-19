@@ -82,7 +82,7 @@
     -->
     <bean id="buienradarServerImpl" class="org.vpk.rmt.serviceproviders.buienradar.server.impl.BuienradarServerImpl">
         <!-- will be using the client api -->
-        <property name="buienradarClient" ref="buienradarClient" />
+        <argument ref="buienradarClient" />
     </bean>
 
     <!-- cxf providers -->

@@ -21,10 +21,10 @@ public class BuienradarServerImpl implements BuienradarServer {
     private ServerToClient serverToClient;
     private ClientModelToServerModel clientModelToServerModel = new ClientModelToServerModel();
 
-    public BuienradarServerImpl() {
+    private BuienradarServerImpl() {
     }
 
-    public void setBuienradarClient(BuienradarClient buienradarClient) {
+    public BuienradarServerImpl(BuienradarClient buienradarClient) {
         serverToClient = new ServerToClient(buienradarClient);
     }
 
@@ -32,7 +32,7 @@ public class BuienradarServerImpl implements BuienradarServer {
     public List<ActualWeatherDataForRegion> getActualWeatherDataForRegion(@PathParam("regions") String regions) throws BuienradarServerException {
         List<String> regionList = Arrays.asList(regions.split(","));
         List<ActualWeatherDataForRegion> actualWeatherDataForRegionList = serverToClient.getWeerStationList(regionList).stream()
-                .map(clientModelToServerModel.getWeerstationToActualWeatherDataForRegionMapper())
+                .map(clientModelToServerModel.getWeerstation2ActualWeatherDataForRegionMapper())
                 .collect(Collectors.toList());
         return actualWeatherDataForRegionList;
     }
