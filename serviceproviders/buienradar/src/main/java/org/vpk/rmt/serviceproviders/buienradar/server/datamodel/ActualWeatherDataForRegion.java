@@ -35,11 +35,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "region", "latitude", "longitude", "humidity", "temperature"})
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class WeatherDataActualForRegion {
+public class ActualWeatherDataForRegion {
 
     private static final long serialVersionUID = 1L;
 
-    public WeatherDataActualForRegion() {
+    public ActualWeatherDataForRegion() {
     }
 
     @JsonProperty("humidity")

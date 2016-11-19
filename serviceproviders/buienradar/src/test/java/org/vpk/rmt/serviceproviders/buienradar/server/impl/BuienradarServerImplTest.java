@@ -2,15 +2,12 @@ package org.vpk.rmt.serviceproviders.buienradar.server.impl;
 
 import org.junit.Test;
 import org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Weerstation;
 import org.vpk.rmt.serviceproviders.buienradar.client.stub.BuienradarClientStub;
-import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherDataActualForRegion;
-import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.WeatherInformation;
+import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.ActualWeatherDataForRegion;
 import org.vpk.rmt.serviceproviders.buienradar.server.exceptions.*;
 
 import javax.ws.rs.NotFoundException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -90,8 +87,8 @@ public class BuienradarServerImplTest {
     public void testGetWeatherDataActualForRegion() throws BuienradarServerException {
         BuienradarServerImpl buienradarServer = new BuienradarServerImpl();
         buienradarServer.setBuienradarClient(new BuienradarClientStub("buienradarnl-20161108222000.xml"));
-        List<WeatherDataActualForRegion> weatherDataActualForRegionList =
-                buienradarServer.getWeatherDataActualForRegion("Eindhoven,Venloo");
-        assertEquals("number of weerstations is incorrect", 2, weatherDataActualForRegionList.size());
+        List<ActualWeatherDataForRegion> actualWeatherDataForRegionList =
+                buienradarServer.getActualWeatherDataForRegion("Eindhoven,Venloo");
+        assertEquals("number of weerstations is incorrect", 2, actualWeatherDataForRegionList.size());
     }
 }
