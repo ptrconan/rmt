@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     </verwachting_vandaag>
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"region", "latitude", "longitude", "humidity", "temperature"})
+@JsonPropertyOrder({"titel", "tijdweerbericht", "samenvatting", "tekst"})
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TodaysExpectedWeatherData {
 

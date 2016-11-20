@@ -21,22 +21,22 @@ public interface BuienradarServer {
 
     String apiProduces = MediaType.APPLICATION_JSON + "; charset=utf-8\"";
 
-    String PATH_GET_WEATHER_DATA_ACTUAL_FOR_REGION = "/nl/weatherdata/actual/region/{regionsCsv}";
-    String PATH_GET_WEATHER_DATA_EXPECTED_TODAY    = "/nl/weatherdata/expected/today";
-    String PATH_GET_WEATHER_DATA_EXPECTED_NEXT_N   = "/nl/weatherdata/expected/next/{nofDays}";
+    String PATH_GET_ACTUAL_WEATHER_DATA_FOR_REGION = "/nl/weatherdata/actual/region/{regionsCsv}";
+    String PATH_GET_TODAYS_EXPECTED_WEATHER_DATA = "/nl/weatherdata/expected/today";
+    String PATH_GET_NEXT_N_EXPECTED_WEATHER_DATA = "/nl/weatherdata/expected/next/{nofDays}";
 
     @GET
-    @Path(PATH_GET_WEATHER_DATA_ACTUAL_FOR_REGION)
+    @Path(PATH_GET_ACTUAL_WEATHER_DATA_FOR_REGION)
     @Produces(BuienradarServer.apiProduces)
     List<ActualWeatherDataForRegion> getActualWeatherDataForRegion(@PathParam("regions") String regions) throws BuienradarServerException;
 
     @GET
-    @Path(PATH_GET_WEATHER_DATA_EXPECTED_TODAY)
+    @Path(PATH_GET_TODAYS_EXPECTED_WEATHER_DATA)
     @Produces(BuienradarServer.apiProduces)
     TodaysExpectedWeatherData getTodaysExpectedWeatherData() throws BuienradarServerException;
 
     @GET
-    @Path(PATH_GET_WEATHER_DATA_EXPECTED_NEXT_N)
+    @Path(PATH_GET_NEXT_N_EXPECTED_WEATHER_DATA)
     @Produces(BuienradarServer.apiProduces)
     List<NextExpectedWeatherData> getNextExpectedWeatherData(@PathParam("nofDays") String nofDays) throws BuienradarServerException;
 
