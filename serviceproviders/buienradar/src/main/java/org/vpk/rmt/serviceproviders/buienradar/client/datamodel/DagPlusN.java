@@ -3,7 +3,7 @@ package org.vpk.rmt.serviceproviders.buienradar.client.datamodel;
 /**
  * Created by Pieter on 19-11-2016.
  */
-public class DagPlusN {
+public class DagPlusN<T> {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,9 +20,6 @@ public class DagPlusN {
     protected int sneeuwcms;
     protected int windkracht;
     protected String windrichting;
-
-    private DagPlusN() {
-    }
 
     public DagPlusN(DagPlus1 dagPlusX) {
         this.dagweek = dagPlusX.getDagweek();

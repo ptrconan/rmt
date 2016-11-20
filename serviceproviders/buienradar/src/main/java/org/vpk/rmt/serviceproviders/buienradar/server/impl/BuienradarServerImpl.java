@@ -42,24 +42,17 @@ public class BuienradarServerImpl implements BuienradarServer {
     }
 
     @Override
+    public List<NextExpectedWeatherData> getNextExpectedWeatherData(@PathParam("nofDays") String nofDays) throws BuienradarServerException {
+        List<NextExpectedWeatherData> nextExpectedWeatherDataList = serverToClient.getDagPlusNList().stream()
+                .map(clientModelToServerModel.getDagPlusN2NextExpectedWeatherDataMapper())
+                .collect(Collectors.toList());
+        return nextExpectedWeatherDataList.subList(0, Integer.valueOf(nofDays));
+    }
+
+    @Override
     public TodaysExpectedWeatherData getTodaysExpectedWeatherData() throws BuienradarServerException {
         VerwachtingVandaag verwachtingVandaag = serverToClient.getVerwachtingVandaag();
         TodaysExpectedWeatherData todaysExpectedWeatherData = clientModelToServerModel.getVerwachtingVandaag2TodaysExpectedWeatherDataMapper().apply(verwachtingVandaag);
         return todaysExpectedWeatherData;
-    }
-
-    @Override
-    public List<NextExpectedWeatherData> getNextExpectedWeatherData(@PathParam("nofDays") String nofDays) throws BuienradarServerException {
-        VerwachtingMeerdaags verwachtingMeerdaags = serverToClient.getVerwachtingMeerdaags();
-        List<DagPlusN> dagPlusNList = new ArrayList<>();
-        dagPlusNList.add(new DagPlusN(verwachtingMeerdaags.getDagPlus1()));
-        dagPlusNList.add(new DagPlusN(verwachtingMeerdaags.getDagPlus2()));
-        dagPlusNList.add(new DagPlusN(verwachtingMeerdaags.getDagPlus3()));
-        dagPlusNList.add(new DagPlusN(verwachtingMeerdaags.getDagPlus4()));
-        dagPlusNList.add(new DagPlusN(verwachtingMeerdaags.getDagPlus5()));
-        List<NextExpectedWeatherData> nextExpectedWeatherDataList = dagPlusNList.stream()
-                .map(clientModelToServerModel.getDagPlusN2NextExpectedWeatherDataMapper())
-                .collect(Collectors.toList());
-        return nextExpectedWeatherDataList.subList(0, Integer.valueOf(nofDays));
     }
 }

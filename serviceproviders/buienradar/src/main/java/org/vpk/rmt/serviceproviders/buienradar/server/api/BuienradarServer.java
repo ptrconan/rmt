@@ -31,13 +31,12 @@ public interface BuienradarServer {
     List<ActualWeatherDataForRegion> getActualWeatherDataForRegion(@PathParam("regions") String regions) throws BuienradarServerException;
 
     @GET
-    @Path(PATH_GET_TODAYS_EXPECTED_WEATHER_DATA)
-    @Produces(BuienradarServer.apiProduces)
-    TodaysExpectedWeatherData getTodaysExpectedWeatherData() throws BuienradarServerException;
-
-    @GET
     @Path(PATH_GET_NEXT_N_EXPECTED_WEATHER_DATA)
     @Produces(BuienradarServer.apiProduces)
     List<NextExpectedWeatherData> getNextExpectedWeatherData(@PathParam("nofDays") String nofDays) throws BuienradarServerException;
 
+    @GET
+    @Path(PATH_GET_TODAYS_EXPECTED_WEATHER_DATA)
+    @Produces(BuienradarServer.apiProduces)
+    TodaysExpectedWeatherData getTodaysExpectedWeatherData() throws BuienradarServerException;
 }

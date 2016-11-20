@@ -5,6 +5,7 @@ import org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.*;
 import org.vpk.rmt.serviceproviders.buienradar.server.exceptions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -49,24 +50,6 @@ public class ServerToClient {
         }
     }
 
-    public Weergegevens getWeerGegevens() throws BuienradarServerException {
-        return Optional.of(getBuienradarnl())
-                .map(Buienradarnl::getWeergegevens)
-                .orElseThrow(() -> new BuienradarWeerGegevensNotFoundException());
-    }
-
-    public VerwachtingMeerdaags getVerwachtingMeerdaags() throws BuienradarServerException {
-        return Optional.of(getWeerGegevens())
-                .map(Weergegevens::getVerwachtingMeerdaags)
-                .orElseThrow(() -> new BuienradarVerwachtingMeerdaagsNotFoundException());
-    }
-
-    public VerwachtingVandaag getVerwachtingVandaag() throws BuienradarServerException {
-        return Optional.of(getWeerGegevens())
-                .map(Weergegevens::getVerwachtingVandaag)
-                .orElseThrow(() -> new BuienradarVerwachtingVandaagNotFoundException());
-    }
-
     public ActueelWeer getActueelWeer() throws BuienradarServerException {
         return Optional.of(getWeerGegevens())
                 .map(Weergegevens::getActueelWeer)
@@ -85,25 +68,22 @@ public class ServerToClient {
                 .orElseThrow(() -> new BuienradarBuienRadarNotFoundException());
     }
 
-    public Weerstations getWeerStations() throws BuienradarServerException {
-        return Optional.of(getActueelWeer())
-                .map(ActueelWeer::getWeerstations)
-                .orElseThrow(() -> new BuienradarWeerStationsNotFoundException());
+    public VerwachtingMeerdaags getVerwachtingMeerdaags() throws BuienradarServerException {
+        return Optional.of(getWeerGegevens())
+                .map(Weergegevens::getVerwachtingMeerdaags)
+                .orElseThrow(() -> new BuienradarVerwachtingMeerdaagsNotFoundException());
     }
 
-    public Weerstation getWeerStationPathParamId(String id) throws BuienradarServerException {
-        return getWeerStation(id);
+    public VerwachtingVandaag getVerwachtingVandaag() throws BuienradarServerException {
+        return Optional.of(getWeerGegevens())
+                .map(Weergegevens::getVerwachtingVandaag)
+                .orElseThrow(() -> new BuienradarVerwachtingVandaagNotFoundException());
     }
 
-    public Weerstation getWeerStationQueryParam(String id1, String id2) throws BuienradarServerException {
-        String id = "0";
-        if (id1 != null) {
-            id = id1;
-        }
-        if (id2 != null) {
-            id = id2;
-        }
-        return getWeerStation(id);
+    public Weergegevens getWeerGegevens() throws BuienradarServerException {
+        return Optional.of(getBuienradarnl())
+                .map(Buienradarnl::getWeergegevens)
+                .orElseThrow(() -> new BuienradarWeerGegevensNotFoundException());
     }
 
     public Weerstation getWeerStation(String id) throws BuienradarServerException {
@@ -123,5 +103,22 @@ public class ServerToClient {
                 .stream()
                 .filter(weerstation -> (regionList.contains(weerstation.getStationnaam().getRegio())))
                 .collect(Collectors.toList());
+    }
+
+    public Weerstations getWeerStations() throws BuienradarServerException {
+        return Optional.of(getActueelWeer())
+                .map(ActueelWeer::getWeerstations)
+                .orElseThrow(() -> new BuienradarWeerStationsNotFoundException());
+    }
+
+    public List<DagPlusN> getDagPlusNList() throws BuienradarServerException {
+        List<DagPlusN> dagPlusNList = new ArrayList<>();
+        VerwachtingMeerdaags verwachtingMeerdaags = getVerwachtingMeerdaags();
+        dagPlusNList.add(new DagPlusN(verwachtingMeerdaags.getDagPlus1()));
+        dagPlusNList.add(new DagPlusN(verwachtingMeerdaags.getDagPlus2()));
+        dagPlusNList.add(new DagPlusN(verwachtingMeerdaags.getDagPlus3()));
+        dagPlusNList.add(new DagPlusN(verwachtingMeerdaags.getDagPlus4()));
+        dagPlusNList.add(new DagPlusN(verwachtingMeerdaags.getDagPlus5()));
+        return dagPlusNList;
     }
 }
