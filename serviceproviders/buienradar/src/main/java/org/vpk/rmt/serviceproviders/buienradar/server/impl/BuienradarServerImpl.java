@@ -6,14 +6,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.VerwachtingVandaag;
 import org.vpk.rmt.serviceproviders.buienradar.server.api.BuienradarServer;
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.ActualWeatherDataForRegion;
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.NextExpectedWeatherData;
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.TodaysExpectedWeatherData;
 import org.vpk.rmt.serviceproviders.buienradar.server.exceptions.*;
 import org.vpk.rmt.serviceproviders.buienradar.server.transformations.ClientModelToServerModel;
-import scala.collection.parallel.ParIterableLike;
 
 import static com.google.common.primitives.Ints.tryParse;
 
@@ -26,20 +24,20 @@ public class BuienradarServerImpl implements BuienradarServer {
     public static final int MIN_NOF_NEXT_DAYS = 1;
     public static final int MAX_NOF_NEXT_DAYS = 5;
 
-    private ServerToClient serverToClient;
+    private BuienradarServerImplHelper buienradarServerImplHelper;
     private ClientModelToServerModel clientModelToServerModel = new ClientModelToServerModel();
 
     private BuienradarServerImpl() {
     }
 
     public BuienradarServerImpl(BuienradarClient buienradarClient) {
-        serverToClient = new ServerToClient(buienradarClient);
+        buienradarServerImplHelper = new BuienradarServerImplHelper(buienradarClient);
     }
 
     @Override
     public List<ActualWeatherDataForRegion> getActualWeatherDataForRegion(@PathParam("regions") String regions) throws BuienradarServerException {
         List<String> regionList = Arrays.asList(regions.split(","));
-        List<ActualWeatherDataForRegion> actualWeatherDataForRegionList = serverToClient.getWeerStationList(regionList).stream()
+        List<ActualWeatherDataForRegion> actualWeatherDataForRegionList = buienradarServerImplHelper.getWeerStationList(regionList).stream()
                 .map(clientModelToServerModel.getWeerstation2ActualWeatherDataForRegionMapper())
                 .collect(Collectors.toList());
         return actualWeatherDataForRegionList;
@@ -47,7 +45,7 @@ public class BuienradarServerImpl implements BuienradarServer {
 
     @Override
     public List<NextExpectedWeatherData> getNextExpectedWeatherData(@PathParam("nofDays") String nofDays) throws BuienradarServerException {
-        List<NextExpectedWeatherData> nextExpectedWeatherDataList = serverToClient.getDagPlusNList().stream()
+        List<NextExpectedWeatherData> nextExpectedWeatherDataList = buienradarServerImplHelper.getDagPlusNList().stream()
                 .map(clientModelToServerModel.getDagPlusN2NextExpectedWeatherDataMapper())
                 .collect(Collectors.toList());
         // top the number of next days to the maximum or set to maximum if larger than allowed or invalid string
@@ -61,7 +59,7 @@ public class BuienradarServerImpl implements BuienradarServer {
     @Override
     public TodaysExpectedWeatherData getTodaysExpectedWeatherData() throws BuienradarServerException {
         TodaysExpectedWeatherData todaysExpectedWeatherData = clientModelToServerModel.getVerwachtingVandaag2TodaysExpectedWeatherDataMapper()
-                .apply(serverToClient.getVerwachtingVandaag());
+                .apply(buienradarServerImplHelper.getVerwachtingVandaag());
         return todaysExpectedWeatherData;
     }
 }

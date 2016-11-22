@@ -15,7 +15,7 @@ import static org.joda.time.DateTime.now;
 /**
  * Created by Pieter on 19-11-2016.
  */
-public class ServerToClient {
+public class BuienradarServerImplHelper {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,10 +23,10 @@ public class ServerToClient {
     private BuienradarClient buienradarClient;
     private DateTime dateTimeLastSuccessFullUpdate;
 
-    private ServerToClient() {
+    private BuienradarServerImplHelper() {
     }
 
-    public ServerToClient(BuienradarClient buienradarClient) {
+    public BuienradarServerImplHelper(BuienradarClient buienradarClient) {
         this.buienradarnl = null;
         this.buienradarClient = buienradarClient;
         this.dateTimeLastSuccessFullUpdate = new DateTime(); // TODO: minus offset for stale detemination
