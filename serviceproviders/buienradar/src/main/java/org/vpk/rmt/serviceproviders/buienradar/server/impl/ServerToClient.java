@@ -86,12 +86,12 @@ public class ServerToClient {
                 .orElseThrow(() -> new BuienradarWeerGegevensNotFoundException());
     }
 
-    public Weerstation getWeerStation(String id) throws BuienradarServerException {
+    public Weerstation getWeerStation(int id) throws BuienradarServerException {
         return Optional.of(getWeerStations())
                 .map(Weerstations::getWeerstation)
                 .get()
                 .stream()
-                .filter(weerstation -> weerstation.getId().equals(Short.valueOf(id)))
+                .filter(weerstation -> weerstation.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new BuienradarWeerStationNotFoundException());
     }

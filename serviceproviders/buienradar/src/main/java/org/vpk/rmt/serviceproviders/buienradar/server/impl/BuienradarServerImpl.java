@@ -1,13 +1,11 @@
 package org.vpk.rmt.serviceproviders.buienradar.server.impl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.DagPlusN;
-import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.VerwachtingMeerdaags;
 import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.VerwachtingVandaag;
 import org.vpk.rmt.serviceproviders.buienradar.server.api.BuienradarServer;
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.ActualWeatherDataForRegion;
@@ -15,12 +13,18 @@ import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.NextExpectedWeat
 import org.vpk.rmt.serviceproviders.buienradar.server.datamodel.TodaysExpectedWeatherData;
 import org.vpk.rmt.serviceproviders.buienradar.server.exceptions.*;
 import org.vpk.rmt.serviceproviders.buienradar.server.transformations.ClientModelToServerModel;
+import scala.collection.parallel.ParIterableLike;
+
+import static com.google.common.primitives.Ints.tryParse;
 
 import javax.ws.rs.PathParam;
 
 public class BuienradarServerImpl implements BuienradarServer {
 
     private static final long serialVersionUID = 1L;
+
+    public static final int MIN_NOF_NEXT_DAYS = 1;
+    public static final int MAX_NOF_NEXT_DAYS = 5;
 
     private ServerToClient serverToClient;
     private ClientModelToServerModel clientModelToServerModel = new ClientModelToServerModel();
@@ -46,13 +50,18 @@ public class BuienradarServerImpl implements BuienradarServer {
         List<NextExpectedWeatherData> nextExpectedWeatherDataList = serverToClient.getDagPlusNList().stream()
                 .map(clientModelToServerModel.getDagPlusN2NextExpectedWeatherDataMapper())
                 .collect(Collectors.toList());
-        return nextExpectedWeatherDataList.subList(0, Integer.valueOf(nofDays));
+        // top the number of next days to the maximum or set to maximum if larger than allowed or invalid string
+        Integer checkedNofDays = Optional.ofNullable(tryParse(nofDays))
+                .map(Integer::valueOf)
+                .filter(nofNextDays -> (nofNextDays >= MIN_NOF_NEXT_DAYS && nofNextDays <= MAX_NOF_NEXT_DAYS))
+                .orElse(MAX_NOF_NEXT_DAYS);
+        return nextExpectedWeatherDataList.subList(0, checkedNofDays);
     }
 
     @Override
     public TodaysExpectedWeatherData getTodaysExpectedWeatherData() throws BuienradarServerException {
-        VerwachtingVandaag verwachtingVandaag = serverToClient.getVerwachtingVandaag();
-        TodaysExpectedWeatherData todaysExpectedWeatherData = clientModelToServerModel.getVerwachtingVandaag2TodaysExpectedWeatherDataMapper().apply(verwachtingVandaag);
+        TodaysExpectedWeatherData todaysExpectedWeatherData = clientModelToServerModel.getVerwachtingVandaag2TodaysExpectedWeatherDataMapper()
+                .apply(serverToClient.getVerwachtingVandaag());
         return todaysExpectedWeatherData;
     }
 }

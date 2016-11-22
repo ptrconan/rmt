@@ -10,6 +10,9 @@ import org.vpk.rmt.serviceproviders.buienradar.server.exceptions.*;
 
 import javax.ws.rs.NotFoundException;
 
+import java.util.Optional;
+
+import static com.google.common.primitives.Ints.tryParse;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -22,16 +25,14 @@ public class ServerToClientTest {
 
     // TODO: create data related tests
 
-    // all exception related tests
+    @Test
+    public void doTest() {
+//        ServerToClient serverToClient = new ServerToClient(new BuienradarClientStub("buienradarnl-20161108222000.xml"));
+//        serverToClient.getDagPlusNList();
+    }
 
-//    @Test
-//    public void testNoBuienIndex() throws BuienradarServerException {
-//        BuienradarClient buienradarClient = new BuienradarClientStub("buienradarnl-20161108222000.xml");
-//        buienradarClient.getBuienradarnl().getWeergegevens().getActueelWeer().setBuienindex(null);
-//        ServerToClient serverToClient = new ServerToClient(buienradarClient);
-//        Buienindex buienindex = serverToClient.getBuienIndex();
-//        int i = 0;
-//    }
+
+    // all exception related tests
 
     @Test (expected = BuienradarClientCommunicationException.class)
     public void testClientThrowsException() throws BuienradarServerException {
@@ -44,7 +45,7 @@ public class ServerToClientTest {
     @Test(expected = BuienradarActueelWeerNotFoundException.class)
     public void testNoActueelWeer() throws BuienradarServerException {
         ServerToClient serverToClient = new ServerToClient(new BuienradarClientStub("buienradarnl-20161108222000-no-actueel_weer.xml"));
-        serverToClient.getWeerStation("dummyId");
+        serverToClient.getWeerStation(0);
     }
 
     @Test (expected = BuienradarWeerGegevensNotFoundException.class)
@@ -62,12 +63,12 @@ public class ServerToClientTest {
     @Test (expected = BuienradarWeerStationNotFoundException.class)
     public void testNoWeerStation() throws BuienradarServerException {
         ServerToClient serverToClient = new ServerToClient(new BuienradarClientStub("buienradarnl-20161108222000-no-weerstation.xml"));
-        serverToClient.getWeerStation("0");
+        serverToClient.getWeerStation(0);
     }
 
     @Test (expected = BuienradarWeerStationNotFoundException.class)
     public void testUnknownStation() throws BuienradarServerException {
         ServerToClient serverToClient = new ServerToClient(new BuienradarClientStub("buienradarnl-20161108222000.xml"));
-        serverToClient.getWeerStation("0");
+        serverToClient.getWeerStation(0);
     }
 }
