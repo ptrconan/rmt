@@ -28,7 +28,7 @@ public interface BuienradarServer {
     @GET
     @Path(PATH_GET_ACTUAL_WEATHER_DATA_FOR_REGION)
     @Produces(BuienradarServer.apiProduces)
-    List<ActualWeatherDataForRegion> getActualWeatherDataForRegion(@PathParam("regions") String regions) throws BuienradarServerException;
+    List<ActualWeatherDataForRegion> getActualWeatherDataForRegion(@PathParam("regionsCsv") String regionsCsv) throws BuienradarServerException;
 
     @GET
     @Path(PATH_GET_NEXT_N_EXPECTED_WEATHER_DATA)

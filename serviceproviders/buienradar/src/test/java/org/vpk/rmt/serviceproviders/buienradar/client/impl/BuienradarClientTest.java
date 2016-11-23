@@ -9,14 +9,14 @@ import org.vpk.rmt.serviceproviders.buienradar.client.datamodel.Buienradarnl;
 
 public class BuienradarClientTest {
 
-	@Test
-	public void testLiveWeerGegevens() {
-		BuienradarClient buienradarClient = JAXRSClientFactory.create("http://xml.buienradar.nl", BuienradarClient.class);
-		Buienradarnl response = buienradarClient.getBuienradarnl();
+    @Test
+    public void testLiveWeerGegevens() {
+        BuienradarClient buienradarClient = JAXRSClientFactory.create("http://xml.buienradar.nl", BuienradarClient.class);
+        Buienradarnl response = buienradarClient.getBuienradarnl();
 
-		assertEquals("Titel is not as expected, ", "www.buienradar.nl - actuele weersinformatie", response.getWeergegevens().getTitel());
-		assertEquals("Omschrijving is not as expected, ", "XML feed weersinformatie", response.getWeergegevens().getOmschrijving());
-		assertEquals("Number of weerstations is not as expected, ", 50, response.getWeergegevens().getActueelWeer().getWeerstations().getWeerstation().size());
-	}
+        assertEquals("Titel is not as expected, ", "www.buienradar.nl - actuele weersinformatie Buienradar", response.getWeergegevens().getTitel());
+        assertEquals("Omschrijving is not as expected, ", "XML feed Buienradar weersinformatie", response.getWeergegevens().getOmschrijving());
+        assertEquals("Number of weerstations is not as expected, ", 50, response.getWeergegevens().getActueelWeer().getWeerstations().getWeerstation().size());
+    }
 
 }

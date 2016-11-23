@@ -15,8 +15,6 @@ import org.vpk.rmt.serviceproviders.buienradar.server.transformations.ClientMode
 
 import static com.google.common.primitives.Ints.tryParse;
 
-import javax.ws.rs.PathParam;
-
 public class BuienradarServerImpl implements BuienradarServer {
 
     private static final long serialVersionUID = 1L;
@@ -35,8 +33,8 @@ public class BuienradarServerImpl implements BuienradarServer {
     }
 
     @Override
-    public List<ActualWeatherDataForRegion> getActualWeatherDataForRegion(@PathParam("regions") String regions) throws BuienradarServerException {
-        List<String> regionList = Arrays.asList(regions.split(","));
+    public List<ActualWeatherDataForRegion> getActualWeatherDataForRegion(String regionsCsv) throws BuienradarServerException {
+        List<String> regionList = Arrays.asList(regionsCsv.split(","));
         List<ActualWeatherDataForRegion> actualWeatherDataForRegionList = buienradarServerImplHelper.getWeerStationList(regionList).stream()
                 .map(clientModelToServerModel.getWeerstation2ActualWeatherDataForRegionMapper())
                 .collect(Collectors.toList());
@@ -44,7 +42,7 @@ public class BuienradarServerImpl implements BuienradarServer {
     }
 
     @Override
-    public List<NextExpectedWeatherData> getNextExpectedWeatherData(@PathParam("nofDays") String nofDays) throws BuienradarServerException {
+    public List<NextExpectedWeatherData> getNextExpectedWeatherData(String nofDays) throws BuienradarServerException {
         List<NextExpectedWeatherData> nextExpectedWeatherDataList = buienradarServerImplHelper.getDagPlusNList().stream()
                 .map(clientModelToServerModel.getDagPlusN2NextExpectedWeatherDataMapper())
                 .collect(Collectors.toList());
