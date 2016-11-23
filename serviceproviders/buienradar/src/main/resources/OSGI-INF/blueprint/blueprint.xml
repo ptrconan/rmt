@@ -3,10 +3,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:jaxrs-server="http://cxf.apache.org/blueprint/jaxrs"
     xmlns:jaxrs-client="http://cxf.apache.org/blueprint/jaxrs-client"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
     xsi:schemaLocation="
       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
       http://cxf.apache.org/blueprint/jaxrs http://cxf.apache.org/schemas/blueprint/jaxrs.xsd
       http://cxf.apache.org/blueprint/jaxrs-client http://cxf.apache.org/schemas/blueprint/jaxrs-client.xsd">
+
+    <cm:property-placeholder id="buienradar-properties" persistent-id="org.vpk.rmt.serviceproviders.buienradar" >
+        <cm:default-properties>
+            <cm:property name="client.endpoint" value="UNDEFINED" />
+        </cm:default-properties>
+    </cm:property-placeholder>
 
     <!--
       note on xmlns:jaxrs-client, see http://cxf.apache.org/docs/jax-rs.html comment:
@@ -51,7 +58,7 @@
     https://access.redhat.com/documentation/en-US/Red_Hat_JBoss_Fuse/6.2/html/Apache_CXF_Development_Guide/JAXRSEndpointConfig-CltConfig.html
     -->
     <jaxrs-client:client id="buienradarClient"
-        address="http://xml.buienradar.nl"
+        address="${client.endpoint}"
         serviceClass="org.vpk.rmt.serviceproviders.buienradar.client.api.BuienradarClient" />
 
     <!--
